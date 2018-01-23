@@ -23,10 +23,11 @@ DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categoria` (
-  `idcategoria` int(11) DEFAULT NULL,
+  `idcategoria` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `descripcion` varchar(256) DEFAULT NULL,
-  `condicion` tinyint(1) DEFAULT NULL
+  `condicion` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idcategoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,7 +48,7 @@ DROP TABLE IF EXISTS `cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cliente` (
-  `idcliente` int(11) DEFAULT NULL,
+  `idcliente` int(11) NOT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `direccion` varchar(256) DEFAULT NULL,
@@ -55,7 +56,10 @@ CREATE TABLE `cliente` (
   `email` varchar(30) DEFAULT NULL,
   `estado` varchar(30) DEFAULT NULL,
   `pais` varchar(30) DEFAULT NULL,
-  `condicion` tinyint(1) DEFAULT NULL
+  `condicion` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idcliente`),
+  KEY `idsucursal` (`idsucursal`),
+  CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,11 +80,16 @@ DROP TABLE IF EXISTS `detalle_venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_venta` (
-  `iddetalleventa` int(11) DEFAULT NULL,
+  `iddetalleventa` int(11) NOT NULL,
   `idventa` int(11) DEFAULT NULL,
   `idproducto` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
-  `precio_venta` decimal(11,3) DEFAULT NULL
+  `precio_venta` decimal(11,3) DEFAULT NULL,
+  PRIMARY KEY (`iddetalleventa`),
+  KEY `idventa` (`idventa`),
+  KEY `idproducto` (`idproducto`),
+  CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`idventa`) REFERENCES `venta` (`idventa`),
+  CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,12 +110,15 @@ DROP TABLE IF EXISTS `devoluciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `devoluciones` (
-  `iddevoluciones` int(11) DEFAULT NULL,
+  `iddevoluciones` int(11) NOT NULL,
   `idproducto` int(11) DEFAULT NULL,
   `idcliente` int(11) DEFAULT NULL,
-  `idsucursal` int(11) DEFAULT NULL,
-  `idproveedor` int(11) DEFAULT NULL,
-  `razones` varchar(50) DEFAULT NULL
+  `razones` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`iddevoluciones`),
+  KEY `idproducto` (`idproducto`),
+  KEY `idcliente` (`idcliente`),
+  CONSTRAINT `devoluciones_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`),
+  CONSTRAINT `devoluciones_ibfk_2` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -127,7 +139,7 @@ DROP TABLE IF EXISTS `empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `empleado` (
-  `idempleado` int(11) DEFAULT NULL,
+  `idempleado` int(11) NOT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `apellidos` varchar(50) DEFAULT NULL,
@@ -139,7 +151,11 @@ CREATE TABLE `empleado` (
   `pais` varchar(30) DEFAULT NULL,
   `imagen` varchar(30) DEFAULT NULL,
   `condicion` tinyint(1) DEFAULT NULL,
-  `fecha_ingreso` date DEFAULT NULL
+  `fecha_ingreso` date DEFAULT NULL,
+  `puesto` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idempleado`),
+  KEY `idsucursal` (`idsucursal`),
+  CONSTRAINT `empleado_ibfk_1` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -160,12 +176,22 @@ DROP TABLE IF EXISTS `facturacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `facturacion` (
-  `idfacturacion` int(11) DEFAULT NULL,
+  `idfacturacion` int(11) NOT NULL,
   `idventa` int(11) DEFAULT NULL,
   `idcliente` int(11) DEFAULT NULL,
   `idempleado` int(11) DEFAULT NULL,
   `total` decimal(11,3) DEFAULT NULL,
-  `fecha_facturacion` datetime DEFAULT NULL
+  `fecha_facturacion` datetime DEFAULT NULL,
+  `idsucursal` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idfacturacion`),
+  KEY `idventa` (`idventa`),
+  KEY `idcliente` (`idcliente`),
+  KEY `idempleado` (`idempleado`),
+  KEY `idsucursal` (`idsucursal`),
+  CONSTRAINT `facturacion_ibfk_1` FOREIGN KEY (`idventa`) REFERENCES `venta` (`idventa`),
+  CONSTRAINT `facturacion_ibfk_2` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `facturacion_ibfk_3` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`),
+  CONSTRAINT `facturacion_ibfk_4` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -186,14 +212,19 @@ DROP TABLE IF EXISTS `membresia`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `membresia` (
-  `idmembresia` int(11) DEFAULT NULL,
+  `idmembresia` int(11) NOT NULL,
   `idcliente` int(11) DEFAULT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   `fecha_inicio` date DEFAULT NULL,
   `fecha_final` date DEFAULT NULL,
   `tipo_membresia` varchar(100) DEFAULT NULL,
   `beneficios` varchar(100) DEFAULT NULL,
-  `foto_cliente` varchar(30) DEFAULT NULL
+  `foto_cliente` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idmembresia`),
+  KEY `idcliente` (`idcliente`),
+  KEY `idsucursal` (`idsucursal`),
+  CONSTRAINT `membresia_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `membresia_ibfk_2` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,12 +245,20 @@ DROP TABLE IF EXISTS `pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pedido` (
-  `idpedido` int(11) DEFAULT NULL,
+  `idpedido` int(11) NOT NULL,
   `idcliente` int(11) DEFAULT NULL,
   `idproducto` int(11) DEFAULT NULL,
   `num_pedido` int(11) DEFAULT NULL,
   `fecha_pedido` datetime DEFAULT NULL,
-  `condicion` tinyint(1) DEFAULT NULL
+  `condicion` tinyint(1) DEFAULT NULL,
+  `direccion` varchar(30) DEFAULT NULL,
+  `estado` varchar(30) DEFAULT NULL,
+  `pais` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idpedido`),
+  KEY `idcliente` (`idcliente`),
+  KEY `idproducto` (`idproducto`),
+  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -240,17 +279,23 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `producto` (
-  `idproducto` int(11) DEFAULT NULL,
+  `idproducto` int(11) NOT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   `idcategoria` int(11) DEFAULT NULL,
   `idproveedor` int(11) DEFAULT NULL,
-  `idcliente` int(11) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `precio` decimal(11,3) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `descripcion` varchar(256) DEFAULT NULL,
   `imagen` varchar(100) DEFAULT NULL,
-  `condicion` tinyint(1) DEFAULT NULL
+  `condicion` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idproducto`),
+  KEY `idcategoria` (`idcategoria`),
+  KEY `idsucursal` (`idsucursal`),
+  KEY `idproveedor` (`idproveedor`),
+  CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`idcategoria`),
+  CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`),
+  CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`idproveedor`) REFERENCES `proveedor` (`idproveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -271,14 +316,16 @@ DROP TABLE IF EXISTS `proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `proveedor` (
-  `idproveedor` int(11) DEFAULT NULL,
+  `idproveedor` int(11) NOT NULL,
   `idsucursal` int(11) DEFAULT NULL,
-  `idproducto` int(11) DEFAULT NULL,
   `nombre` varchar(30) DEFAULT NULL,
   `direccion` varchar(30) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `estado` varchar(30) DEFAULT NULL,
-  `pais` varchar(30) DEFAULT NULL
+  `pais` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idproveedor`),
+  KEY `idsucursal` (`idsucursal`),
+  CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -299,17 +346,13 @@ DROP TABLE IF EXISTS `sucursal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sucursal` (
-  `idsucursal` int(11) DEFAULT NULL,
-  `idempleado` int(11) DEFAULT NULL,
-  `idproveedor` int(11) DEFAULT NULL,
-  `idproducto` int(11) DEFAULT NULL,
-  `idcliente` int(11) DEFAULT NULL,
-  `idventa` int(11) DEFAULT NULL,
+  `idsucursal` int(11) NOT NULL,
   `ubicacion` varchar(100) DEFAULT NULL,
   `estado` varchar(100) DEFAULT NULL,
   `pais` varchar(100) DEFAULT NULL,
   `num_sucursal` int(11) DEFAULT NULL,
-  `condicion` tinyint(1) DEFAULT NULL
+  `condicion` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -330,9 +373,12 @@ DROP TABLE IF EXISTS `sueldo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sueldo` (
-  `idsueldo` int(11) DEFAULT NULL,
+  `idsueldo` int(11) NOT NULL,
   `idempleado` int(11) DEFAULT NULL,
-  `cantidad` decimal(11,3) DEFAULT NULL
+  `cantidad` decimal(11,3) DEFAULT NULL,
+  PRIMARY KEY (`idsueldo`),
+  KEY `idempleado` (`idempleado`),
+  CONSTRAINT `sueldo_ibfk_1` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -353,9 +399,12 @@ DROP TABLE IF EXISTS `turno`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `turno` (
-  `idturno` int(11) DEFAULT NULL,
+  `idturno` int(11) NOT NULL,
   `idempleado` int(11) DEFAULT NULL,
-  `nombre_turno` varchar(20) DEFAULT NULL
+  `nombre_turno` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idturno`),
+  KEY `idempleado` (`idempleado`),
+  CONSTRAINT `turno_ibfk_1` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -376,12 +425,19 @@ DROP TABLE IF EXISTS `venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `venta` (
-  `idventa` int(11) DEFAULT NULL,
+  `idventa` int(11) NOT NULL,
   `idcliente` int(11) DEFAULT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   `idempleado` int(11) DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
-  `total_venta` decimal(11,3) DEFAULT NULL
+  `total_venta` decimal(11,3) DEFAULT NULL,
+  PRIMARY KEY (`idventa`),
+  KEY `idcliente` (`idcliente`),
+  KEY `idsucursal` (`idsucursal`),
+  KEY `idempleado` (`idempleado`),
+  CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`),
+  CONSTRAINT `venta_ibfk_3` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -403,4 +459,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-23 16:11:42
+-- Dump completed on 2018-01-23 17:50:56
