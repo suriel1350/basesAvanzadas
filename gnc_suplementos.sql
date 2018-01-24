@@ -338,6 +338,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+INSERT INTO `proveedor` VALUES (1,3,'Juan Lopez','Av Emiliano Zapata #200','juan@juan.com','Puebla','Mexico'),(2,4,'Marcos JImenez','Blvd 5 Mayo #450','marcos@marcos.com','Veracruz','Mexico'),(3,3,'Michell Muñoz','Av las torres #590','michell@michell.com','Puebla','Mexico'),(4,8,'Pedro Lopez','Av Juarez #245','pedro@pedro.com','Morelos','Mexico'),(5,8,'Andres Juarez','Prolongacion Galeana #245','andres@andres.com','Veracruz','Mexico'),(6,4,'suriel rosas','Av Concepcion la cruz #226','suriel@suriel.com','Puebla','Mexico'),(7,1,'Asael Mendez','Blvd. Atlixcayotl #2343','asael@asael.com','Morelos','Mexico'),(8,2,'Mike Johnson','Penn Station #234','mike@mike.com','Nueva York','USA'),(9,2,'Lucas Freeman','Penn Station #234','lucas@lucas.com','California','USA'),(10,2,'Jerry Fernandez','Birdman avenue #892','jerry@jerry.com','California','USA'),(11,7,'Mark Santos','Penn Station #234','mark@mark.com','Florida','USA');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +354,7 @@ CREATE TABLE `sucursal` (
   `ubicacion` varchar(100) DEFAULT NULL,
   `estado` varchar(100) DEFAULT NULL,
   `pais` varchar(100) DEFAULT NULL,
-  `num_sucursal` int(11) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
   `condicion` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idsucursal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -365,6 +366,7 @@ CREATE TABLE `sucursal` (
 
 LOCK TABLES `sucursal` WRITE;
 /*!40000 ALTER TABLE `sucursal` DISABLE KEYS */;
+INSERT INTO `sucursal` VALUES (1,'Blvd. Del Niño Poblano 2510','Puebla','México','GNC ANGELOPOLIS',1),(2,'Av. Juárez No. 2927','Puebla','México','GNC LA PAZ',1),(3,'Blvd. Héroes 5 De Mayo No. 3510','Puebla','México','GNC PLAZA DORADA',1),(4,'Lateral Sur No. 905','Puebla','México','GNC SPORT CITY PUEBLA',1),(5,'Av. Forjadores No. 1009','Puebla','México','GNC CHEDRAUI FORJADORES',1),(6,'Via Atlixcayotl No. 1504','Puebla','México','GNC WALMART SAN ANGEL',1),(7,'Av. 9 Sur No. 11302','Puebla','México','GNC WALMART GRAN PLAZA SUR',1),(8,'Av. Reforma No. 309','Puebla','México','GNC AVENIDA REFORMA',1),(9,'Prolongación 11 Sur No. 8307','Puebla','México','GNC AURRERA MAYORAZGO',1),(10,'Blvd. Forjadores No. 3401','Puebla ','México','GNC AURRERA PLAZA SAN DIEGO',1);
 /*!40000 ALTER TABLE `sucursal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -462,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-24 14:29:37
+-- Dump completed on 2018-01-24 15:01:41
