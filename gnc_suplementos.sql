@@ -85,6 +85,8 @@ CREATE TABLE `detalle_venta` (
   `idproducto` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
   `precio_venta` decimal(11,3) DEFAULT NULL,
+  `descuento` decimal(11,3) DEFAULT NULL,
+  `impuesto` decimal(11,3) DEFAULT NULL,
   PRIMARY KEY (`iddetalleventa`),
   KEY `idventa` (`idventa`),
   KEY `idproducto` (`idproducto`),
@@ -459,4 +461,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-23 17:50:56
+-- Dump completed on 2018-01-23 19:13:15
