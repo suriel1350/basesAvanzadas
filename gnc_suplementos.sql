@@ -308,6 +308,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche',NULL,1),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate',NULL,1),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas',NULL,1),(4,5,7,8,38,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina',NULL,1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda',NULL,1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas',NULL,1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas',NULL,1),(9,9,11,2,34,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio',NULL,1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias',NULL,1);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,4 +465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-24 15:01:41
+-- Dump completed on 2018-01-24 15:17:58
