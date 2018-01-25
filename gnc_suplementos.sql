@@ -133,6 +133,7 @@ CREATE TABLE `devoluciones` (
 
 LOCK TABLES `devoluciones` WRITE;
 /*!40000 ALTER TABLE `devoluciones` DISABLE KEYS */;
+INSERT INTO `devoluciones` VALUES (1,6,9,'No cumplio mis extectativas '),(2,7,6,'El producto venía abierto'),(3,7,1,'La Mochila venía con una abertura'),(4,7,6,'La mochila no era la de la imagen en el sistema'),(5,7,9,'La mochila venía rota'),(6,4,7,'La barra ya estaba caducada'),(7,6,5,'El sabor de la barra era otro'),(8,2,9,'El frasco ya venía abierto'),(9,2,5,'La proteína era de otro sabor'),(10,3,4,'Las vitaminas ya estaban caducadas');
 /*!40000 ALTER TABLE `devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -471,4 +472,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-25 13:30:13
+-- Dump completed on 2018-01-25 13:37:52
