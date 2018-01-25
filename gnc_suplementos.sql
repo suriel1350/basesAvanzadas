@@ -168,6 +168,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,7,'Juan','Lopez','juanlopez@juanlopez.com','1995-03-23','CUPU800825569','Blvd. Juarez #345','Puebla','Mexico',NULL,1,'2018-01-01','Gerente'),(2,5,'Armando','Torres Paz','armando@armando.com','1989-12-23','ARTP800825569','Prolongacion Benito Juarez # 45','Veracruz','Mexico',NULL,1,'2017-09-04','Gerente'),(3,1,'Miguel','Lopez Cruz','miguel@miguel.com','1978-02-24','MLPR800825569','Blvd. Atlixcayotl #234','Puebla','Mexico',NULL,1,'2016-06-14','Empleado'),(4,4,'Diana','Cruz Martinez','diana@diana.com','1990-03-30','DCMA900825569','Av las torres #456','Puebla','Mexico',NULL,1,'2015-09-17','Empleado'),(5,6,'Karen','Lopez Muñoz','karen@karen.com','1987-09-19','KLMU800825569','Gustavo A Madero #34','Morelos','Mexico',NULL,1,'2018-01-10','Gerente'),(6,7,'Ana','Sanchez Martinez','ana@ana.com','1990-12-29','ASMA800825569','Calle Bugambilias #45','Veracruz','Mexico',NULL,1,'2016-08-27','Empleado'),(7,9,'Carlos','Sanchez Lopez','carlos@carlos.com','1995-07-19','CSLO800825569','Penn Station #29','Nueva York','USA',NULL,1,'2015-08-19','Empleado'),(8,8,'Gustavo','Cruz Sanchez','tavo@tavo.com','1987-01-28','GCSA800825569','Penn Station #89','Nueva York','USA',NULL,1,'2017-04-20','Gerente'),(9,10,'Liz','Paz Paz','liz@liz.com','1994-02-27','LPPA800825569','Av las torres #45','Puebla','Mexico',NULL,1,'2017-09-27','Gerente'),(10,8,'Marcos','Diaz Diaz','marcos@marcos.com','1995-10-29','MDDI800825569','Av Concepcion la Cruz #2123','Puebla ','Mexico',NULL,1,'2014-09-27','Empleado'),(11,2,'Ana','Cid Cid','ana@ana.com','1993-09-25','ACCI800825569','Av Emiliano Zapata','Veracruz','Mexico',NULL,1,'2016-11-11','Empleado');
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,6 +395,7 @@ CREATE TABLE `sueldo` (
 
 LOCK TABLES `sueldo` WRITE;
 /*!40000 ALTER TABLE `sueldo` DISABLE KEYS */;
+INSERT INTO `sueldo` VALUES (1,2,678.000),(2,11,789.000),(3,10,987.000),(4,9,1089.000),(5,8,567.000),(6,7,621.000),(7,6,890.000),(8,5,1234.000),(9,4,1089.000),(10,3,926.000);
 /*!40000 ALTER TABLE `sueldo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,6 +422,7 @@ CREATE TABLE `turno` (
 
 LOCK TABLES `turno` WRITE;
 /*!40000 ALTER TABLE `turno` DISABLE KEYS */;
+INSERT INTO `turno` VALUES (1,1,'MATUTINO'),(2,11,'NOCTURNO'),(3,7,'MIXTO'),(4,3,'MIXTO'),(5,2,'MATUTINO'),(6,4,'TARDE'),(7,8,'NOCTURNO'),(8,5,'MATUTINO'),(9,6,'MIXTO'),(10,9,'MATUTINO');
 /*!40000 ALTER TABLE `turno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,4 +468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-24 15:17:58
+-- Dump completed on 2018-01-24 21:12:08
