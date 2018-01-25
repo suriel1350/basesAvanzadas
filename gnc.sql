@@ -37,7 +37,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'Aminoacido','Formula 8:1:1',1);
+INSERT INTO `categoria` VALUES (1,'Aminoacido','Formula 8:1:1',1),(2,'Vitamina','Compuestos heterogéneos imprescindibles para la vida',1),(3,'Proteinas','A base de aislado de suero de leche, una proteína de un alto valor biológico',1),(4,'Aminoacidos','Sustancias básicas para conformar las proteínas, y ambos, proteínas y aminoácidos, resultan ser los sostenes esenciales de la vida',1),(5,'CLA','El Ácido Linoleico Conjugado, también conocido como CLA, es un ácido graso esencial indicado en dietas de control de peso y de definición muscular.',1),(6,'Accesorios','Encuentra lo que necesites para hacer de tu entrenamiento más divertido',1),(7,'Barras','Gracias a su aporte calórico natural, ayuda a diferentes procesos metabolicos del cuerpo ',0),(8,'Proteinas Cero Carbs','Proteinas totalmente sin carbohidratos si buscas definición musculas',1),(9,'Creatina','Ayudan a la generación de músculo sufrido durante el entrenamiento',0),(10,'Oxido','Eleva tu energía para que des todo en el entrenamiento',1),(11,'Omegas','Vitaminas esenciales durante el día en tus comidas',1);
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES (1,1,'Fernando Castillo Cosme','Libertad #5947, San Baltazar Lindavista',2228526256,'fcastillocosme@gmail.com','Puebla','México',1),(2,2,'Suriel Asael Rosas Mendez','Av. Emiliano Zapata #3004',22284248534,'surielar@gmail.com','Veracruz','México',1);
+INSERT INTO `cliente` VALUES (1,1,'Fernando Castillo Cosme','Libertad #5947, San Baltazar Lindavista',2228526256,'fcastillocosme@gmail.com','Puebla','Mexico',1),(2,2,'Suriel Asael Rosas Mendez','Av. Emiliano Zapata #3004',2228424853,'surielar@gmail.com','Veracruz','Mexico',1),(3,3,'Ernesto Ramirez Sayago','14 Sur #1109',2228526267,'ramsay@gmail.com','Tampico','Mexico',1),(4,4,'Monica Perez Martin','Zavaleta #9908',2228547836,'mmartin@gmail.com','Veracruz','Mexico',1),(5,5,'Rafael Antonio Comonfort Viveros','Atlixcayotl #2255',8846896745,'comonfortr@gmail.com','Puebla','Mexico',1),(6,1,'Carlos Amador Ramirez','Lindavista #4566',2220864792,'ramcarl@gmail.com','Puebla','Mexico',1),(7,7,'Francisco Alberto Ramirez Augusto','Las Hadas #4445',2226463892,'ramaugfran@gmail.com','Puebla','Mexico',1),(8,8,'Alfredo Gutierrez Garcia','Xicotencatl #556',2229758493,'gugaalf@gmail.com','Tlaxcala','Mexico',1),(9,9,'Jose Ricardo Aguilar Cosme','Anzures #440',2229859312,'jaguilar@gmail.com','Monterrey','Mexico',1),(10,10,'Mabel Ayala Herrera','Priv. Lomas #4654',2224097869,'mabeayher@gmail.com','Mexico','Mexico',1),(11,2,'Maria Fernanda Alvarado Torres','Campeche #990',3338728475,'mafert@gmail.com','Chihuahua','Mexico',1),(12,2,'Diana Esther Castillo Cosme','Libertad #5947',2224353637,'esthercastillo@gmail.com','Puebla','Mexico',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,6 +169,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (1,7,'Juan','Lopez','juanlopez@juanlopez.com','1995-03-23','CUPU800825569','Blvd. Juarez #345','Puebla','Mexico',NULL,1,'2018-01-01','Gerente'),(2,5,'Armando','Torres Paz','armando@armando.com','1989-12-23','ARTP800825569','Prolongacion Benito Juarez # 45','Veracruz','Mexico',NULL,1,'2017-09-04','Gerente'),(3,1,'Miguel','Lopez Cruz','miguel@miguel.com','1978-02-24','MLPR800825569','Blvd. Atlixcayotl #234','Puebla','Mexico',NULL,1,'2016-06-14','Empleado'),(4,4,'Diana','Cruz Martinez','diana@diana.com','1990-03-30','DCMA900825569','Av las torres #456','Puebla','Mexico',NULL,1,'2015-09-17','Empleado'),(5,6,'Karen','Lopez Muñoz','karen@karen.com','1987-09-19','KLMU800825569','Gustavo A Madero #34','Morelos','Mexico',NULL,1,'2018-01-10','Gerente'),(6,7,'Ana','Sanchez Martinez','ana@ana.com','1990-12-29','ASMA800825569','Calle Bugambilias #45','Veracruz','Mexico',NULL,1,'2016-08-27','Empleado'),(7,9,'Carlos','Sanchez Lopez','carlos@carlos.com','1995-07-19','CSLO800825569','Penn Station #29','Nueva York','USA',NULL,1,'2015-08-19','Empleado'),(8,8,'Gustavo','Cruz Sanchez','tavo@tavo.com','1987-01-28','GCSA800825569','Penn Station #89','Nueva York','USA',NULL,1,'2017-04-20','Gerente'),(9,10,'Liz','Paz Paz','liz@liz.com','1994-02-27','LPPA800825569','Av las torres #45','Puebla','Mexico',NULL,1,'2017-09-27','Gerente'),(10,8,'Marcos','Diaz Diaz','marcos@marcos.com','1995-10-29','MDDI800825569','Av Concepcion la Cruz #2123','Puebla ','Mexico',NULL,1,'2014-09-27','Empleado'),(11,2,'Ana','Cid Cid','ana@ana.com','1993-09-25','ACCI800825569','Av Emiliano Zapata','Veracruz','Mexico',NULL,1,'2016-11-11','Empleado');
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,6 +310,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche',NULL,1),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate',NULL,1),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas',NULL,1),(4,5,7,8,38,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina',NULL,1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda',NULL,1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas',NULL,1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas',NULL,1),(9,9,11,2,34,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio',NULL,1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias',NULL,1);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,6 +341,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+INSERT INTO `proveedor` VALUES (1,3,'Juan Lopez','Av Emiliano Zapata #200','juan@juan.com','Puebla','Mexico'),(2,4,'Marcos JImenez','Blvd 5 Mayo #450','marcos@marcos.com','Veracruz','Mexico'),(3,3,'Michell Muñoz','Av las torres #590','michell@michell.com','Puebla','Mexico'),(4,8,'Pedro Lopez','Av Juarez #245','pedro@pedro.com','Morelos','Mexico'),(5,8,'Andres Juarez','Prolongacion Galeana #245','andres@andres.com','Veracruz','Mexico'),(6,4,'suriel rosas','Av Concepcion la cruz #226','suriel@suriel.com','Puebla','Mexico'),(7,1,'Asael Mendez','Blvd. Atlixcayotl #2343','asael@asael.com','Morelos','Mexico'),(8,2,'Mike Johnson','Penn Station #234','mike@mike.com','Nueva York','USA'),(9,2,'Lucas Freeman','Penn Station #234','lucas@lucas.com','California','USA'),(10,2,'Jerry Fernandez','Birdman avenue #892','jerry@jerry.com','California','USA'),(11,7,'Mark Santos','Penn Station #234','mark@mark.com','Florida','USA');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,4 +467,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-24 14:24:54
+-- Dump completed on 2018-01-25 12:31:31
