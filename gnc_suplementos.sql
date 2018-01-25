@@ -53,7 +53,7 @@ CREATE TABLE `cliente` (
   `idsucursal` int(11) DEFAULT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `direccion` varchar(256) DEFAULT NULL,
-  `telefono` int(20) DEFAULT NULL,
+  `telefono` bigint(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
   `estado` varchar(30) DEFAULT NULL,
   `pais` varchar(30) DEFAULT NULL,
@@ -70,6 +70,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (1,1,'Fernando Castillo Cosme','Libertad #5947, San Baltazar Lindavista',2228526256,'fcastillocosme@gmail.com','Puebla','Mexico',1),(2,2,'Suriel Asael Rosas Mendez','Av. Emiliano Zapata #3004',2228424853,'surielar@gmail.com','Veracruz','Mexico',1),(3,3,'Ernesto Ramirez Sayago','14 Sur #1109',2228526267,'ramsay@gmail.com','Tampico','Mexico',1),(4,4,'Monica Perez Martin','Zavaleta #9908',2228547836,'mmartin@gmail.com','Veracruz','Mexico',1),(5,5,'Rafael Antonio Comonfort Viveros','Atlixcayotl #2255',8846896745,'comonfortr@gmail.com','Puebla','Mexico',1),(6,1,'Carlos Amador Ramirez','Lindavista #4566',2220864792,'ramcarl@gmail.com','Puebla','Mexico',1),(7,7,'Francisco Alberto Ramirez Augusto','Las Hadas #4445',2226463892,'ramaugfran@gmail.com','Puebla','Mexico',1),(8,8,'Alfredo Gutierrez Garcia','Xicotencatl #556',2229758493,'gugaalf@gmail.com','Tlaxcala','Mexico',1),(9,9,'Jose Ricardo Aguilar Cosme','Anzures #440',2229859312,'jaguilar@gmail.com','Monterrey','Mexico',1),(10,10,'Mabel Ayala Herrera','Priv. Lomas #4654',2224097869,'mabeayher@gmail.com','Mexico','Mexico',1),(11,2,'Maria Fernanda Alvarado Torres','Campeche #990',3338728475,'mafert@gmail.com','Chihuahua','Mexico',1),(12,2,'Diana Esther Castillo Cosme','Libertad #5947',2224353637,'esthercastillo@gmail.com','Puebla','Mexico',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,6 +457,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000),(2,2,2,3,'2018-01-01 00:00:00',5000.000),(3,3,2,3,'2017-09-05 00:00:00',4000.000),(4,4,5,6,'2018-01-09 00:00:00',3500.000),(5,7,5,9,'2018-01-02 00:00:00',4600.000),(6,12,5,6,'2017-08-07 00:00:00',3500.000),(7,7,5,2,'2017-07-11 00:00:00',780.000),(8,8,9,8,'2016-09-06 00:00:00',3400.000),(9,4,5,6,'2018-01-08 00:00:00',789.000),(10,4,5,10,'2018-01-10 00:00:00',500.000);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -468,4 +470,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-24 21:12:08
+-- Dump completed on 2018-01-25 13:21:23
