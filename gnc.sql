@@ -103,6 +103,7 @@ CREATE TABLE `detalle_venta` (
 
 LOCK TABLES `detalle_venta` WRITE;
 /*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
+INSERT INTO `detalle_venta` VALUES (1,1,2,4,80.000,20.000,16.000),(2,1,6,10,900.000,78.000,16.000),(3,1,9,7,90.000,25.000,10.000),(4,3,6,9,90.000,20.000,13.000),(5,3,7,4,240.000,17.000,16.000),(6,6,9,2,290.000,15.000,30.000),(7,6,8,30,340.000,25.000,16.000),(8,7,8,24,450.000,10.000,16.000),(9,5,9,20,670.000,5.000,10.000),(10,8,2,23,789.000,23.000,13.000);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,6 +133,7 @@ CREATE TABLE `devoluciones` (
 
 LOCK TABLES `devoluciones` WRITE;
 /*!40000 ALTER TABLE `devoluciones` DISABLE KEYS */;
+INSERT INTO `devoluciones` VALUES (1,6,9,'No cumplio mis extectativas '),(2,7,6,'El producto venía abierto'),(3,7,1,'La Mochila venía con una abertura'),(4,7,6,'La mochila no era la de la imagen en el sistema'),(5,7,9,'La mochila venía rota'),(6,4,7,'La barra ya estaba caducada'),(7,6,5,'El sabor de la barra era otro'),(8,2,9,'El frasco ya venía abierto'),(9,2,5,'La proteína era de otro sabor'),(10,3,4,'Las vitaminas ya estaban caducadas');
 /*!40000 ALTER TABLE `devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,6 +208,7 @@ CREATE TABLE `facturacion` (
 
 LOCK TABLES `facturacion` WRITE;
 /*!40000 ALTER TABLE `facturacion` DISABLE KEYS */;
+INSERT INTO `facturacion` VALUES (1,1,1,3,1000.000,'2017-10-02 10:00:00',2),(2,2,2,3,5000.000,'2018-01-01 11:00:00',2),(3,3,3,3,4000.000,'2017-09-05 14:00:00',2),(4,4,4,6,3500.000,'2018-01-09 13:00:00',5),(5,5,7,9,4600.000,'2018-01-02 10:00:00',5),(6,6,12,6,3500.000,'2017-08-07 14:00:00',5),(7,7,7,2,780.000,'2017-07-11 14:00:00',5),(8,8,8,8,3400.000,'2016-09-08 00:00:00',9),(9,9,4,6,789.000,'2018-01-08 10:00:00',5),(10,10,4,10,500.000,'2018-01-11 15:00:00',5);
 /*!40000 ALTER TABLE `facturacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,6 +242,7 @@ CREATE TABLE `membresia` (
 
 LOCK TABLES `membresia` WRITE;
 /*!40000 ALTER TABLE `membresia` DISABLE KEYS */;
+INSERT INTO `membresia` VALUES (1,1,3,'2018-01-01','2019-01-01','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(2,2,3,'2017-06-14','2018-06-14','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(3,3,3,'2017-05-08','2018-05-08','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(4,4,1,'2017-04-11','2018-04-11','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(5,5,2,'2017-11-06','2018-11-06','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(6,6,2,'2017-11-06','2018-11-06','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(7,7,4,'2017-08-20','2018-08-20','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(8,8,5,'2017-07-31','2018-08-31','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(9,9,6,'2018-01-02','2019-01-02','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(10,10,7,'2017-12-01','2018-12-01','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL);
 /*!40000 ALTER TABLE `membresia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,6 +277,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (1,1,1,1,'2017-07-04 13:00:00',1,'Libertad #5947','Puebla','Mexico'),(2,2,2,2,'2017-11-07 14:00:00',1,'Margaritas #8880','Veracruz','Mexico'),(3,3,3,3,'2018-01-01 10:00:00',1,'Zavaleta #778','Puebla','Mexico'),(4,4,4,4,'2018-01-25 10:00:00',0,'Priv. Heroes #332','Puebla','Mexico'),(5,5,6,5,'2018-01-04 08:00:00',1,'Xicotencatl #440','Puebla','Mexico'),(6,6,6,6,'2018-01-17 16:00:00',1,'Limas #550','Tlaxcala','Mexico'),(7,7,7,7,'2018-01-23 17:00:00',0,'Atlixcayotl #2250','Monterrey','Mexico'),(8,8,8,8,'2018-01-24 18:00:00',0,'Zavaleta #770','Mexico','Mexico'),(9,9,9,9,'2018-01-25 08:00:00',0,'14 Sur #1330','Chihuahua','Mexico'),(10,10,10,10,'2018-01-04 14:00:00',1,'Villas de Atlixco #440','Puebla','Mexico');
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,6 +401,7 @@ CREATE TABLE `sueldo` (
 
 LOCK TABLES `sueldo` WRITE;
 /*!40000 ALTER TABLE `sueldo` DISABLE KEYS */;
+INSERT INTO `sueldo` VALUES (1,2,678.000),(2,11,789.000),(3,10,987.000),(4,9,1089.000),(5,8,567.000),(6,7,621.000),(7,6,890.000),(8,5,1234.000),(9,4,1089.000),(10,3,926.000);
 /*!40000 ALTER TABLE `sueldo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -422,6 +428,7 @@ CREATE TABLE `turno` (
 
 LOCK TABLES `turno` WRITE;
 /*!40000 ALTER TABLE `turno` DISABLE KEYS */;
+INSERT INTO `turno` VALUES (1,1,'MATUTINO'),(2,11,'NOCTURNO'),(3,7,'MIXTO'),(4,3,'MIXTO'),(5,2,'MATUTINO'),(6,4,'TARDE'),(7,8,'NOCTURNO'),(8,5,'MATUTINO'),(9,6,'MIXTO'),(10,9,'MATUTINO');
 /*!40000 ALTER TABLE `turno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,6 +462,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000),(2,2,2,3,'2018-01-01 00:00:00',5000.000),(3,3,2,3,'2017-09-05 00:00:00',4000.000),(4,4,5,6,'2018-01-09 00:00:00',3500.000),(5,7,5,9,'2018-01-02 00:00:00',4600.000),(6,12,5,6,'2017-08-07 00:00:00',3500.000),(7,7,5,2,'2017-07-11 00:00:00',780.000),(8,8,9,8,'2016-09-06 00:00:00',3400.000),(9,4,5,6,'2018-01-08 00:00:00',789.000),(10,4,5,10,'2018-01-10 00:00:00',500.000);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -467,4 +475,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-25 12:31:31
+-- Dump completed on 2018-01-25 13:53:03
