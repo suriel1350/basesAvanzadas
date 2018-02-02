@@ -1,0 +1,309 @@
+.gncCentrado{
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 31px;
+	max-width: 50%;
+    height: auto;
+}
+
+.centrarEliminar .muestra{
+    position: relative;
+    float: left;
+    width:  200px;
+    height: 200px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.muestra{
+    position: relative;
+    float: left;
+    width:  100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btnIndex{
+	padding: 20px;
+	margin-bottom: 28px;
+	font-size: 24px;
+}
+
+.error404{
+	color:#333;
+}
+
+/*=============================================
+BARRA PRODUCTOS
+=============================================*/
+
+.product_view .modal-dialog { 
+  max-width: 800px; 
+  width: 100%;
+}
+
+.pre-cost {
+  text-decoration: line-through; 
+  color: #a5a5a5;
+}
+
+.space-ten {
+  padding: 10px 0;
+}
+
+.product {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product .caption {
+  margin-top: 15px;
+}
+
+.product .caption h6 {
+  color: #455a64;
+}
+
+.product .caption .price + .price {
+  margin-left: 15px;
+}
+
+.product.tumbnail {
+  box-shadow: 0 5px 25px 0 transparent;
+  transition: 0.3s linear;
+  padding-top: 0;
+}
+
+.product.tumbnail img:hover {
+  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.2);
+}
+
+.single-product span {
+  display: inline-block;
+}
+
+.rating .fa-star{
+  font-size: 16px;
+  color: #f7d4a0;
+  margin-left: 2px;
+}
+
+.single-product .rating + * {
+  margin-left: 15px;
+}
+
+.single-product h1.h1-variant-2 {
+  margin-bottom: 20px;
+}
+
+.single-product .caption:before {
+  content: '';
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.single-product .caption span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.single-product .caption .price {
+  font-weight: 400;
+}
+
+.single-product .caption .price.sale {
+  color: #e75854;
+  font-size: 33px;
+}
+
+.single-product .caption * + .price {
+  margin-left: 10.8%;
+}
+
+.single-product .caption * + .quantity {
+  margin-left: 26px;
+}
+
+.single-product .caption .info-list {
+  border-bottom: 1px solid #f3f3ed;
+  border-top: 1px solid #f3f3ed;
+  font-family: Montserrat, sans-serif;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  text-align: left;
+}
+
+.single-product .caption .info-list dt, .single-product .caption .info-list dd {
+  display: inline-block;
+  line-height: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.single-product .caption .info-list dt {
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: #a7b0b4;
+  width: 35%;
+  text-transform: uppercase;
+}
+
+.single-product .caption .info-list dd {
+  font-size: 15px;
+  color: #565452;
+  width: 62.5%;
+}
+
+.single-product .caption .share span.small {
+  margin-top: 9px;
+}
+
+.price {
+  display: inline-block;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2b2f3e;
+}
+
+.price.sale {
+  color: #e75854;
+}
+
+.price del {
+  color: #b0bec5;
+}
+
+.quantity {
+  text-align: center;
+  font-family: Montserrat, sans-serif;
+  font-size: 12px;
+  background: #eceff1;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 82px;
+  height: auto;
+  display: inline-block;
+}
+
+.quantity span {
+  display: inline-block;
+}
+
+.quantity .num {
+  width: 26px;
+}
+
+.quantity [class*='fa-'] {
+  padding-top: 4px;
+  width: 22px;
+  padding-bottom: 4px;
+  color: #b0bec5;
+  cursor: pointer;
+}
+
+.quantity [class*='fa-']:hover {
+  color: #455a64;
+}
+
+/*=============================================
+ESCRITORIO GRANDE (LG revisamos en 1366px en adelante)
+=============================================*/
+
+@media (min-width:1200px){
+
+	.col-lg-0{
+		display: none;
+	}
+
+	.error404 h1{
+		font-size:300px;
+		text-shadow:8px 8px 1px #dadada;
+	}
+
+	.single-product .caption * + .price {
+    margin-left: 7.8%;
+  }
+
+}
+
+/*=============================================
+ESCRITORIO MEDIANO O TABLET HORIZONTAL (MD revisamos en 1024px)
+=============================================*/
+
+@media (max-width:1199px) and (min-width:992px){
+
+	.col-md-0{
+		display: none;
+	}
+
+	.error404 h1{
+		font-size:200px;
+		text-shadow:6px 6px 1px #dadada;
+	}
+
+	.single-product .caption .share span.small {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+}
+
+/*=============================================
+ESCRITORIO PEQUEÑO O TABLET VERTICAL (SM revisamos en 768px)
+=============================================*/
+
+@media (max-width:991px) and (min-width:768px){
+
+	.col-sm-0{
+		display: none;
+	}
+
+	.error404 h1{
+		font-size:150px;
+		text-shadow:4px 4px 1px #dadada;
+	}
+
+	.single-product .table-mobile tr {
+    padding-top: 0;
+  }
+  .single-product .table-mobile tr:before {
+    display: none;
+  }
+
+}
+
+/*=============================================
+MOVIL (XS revisamos en 320px)
+=============================================*/
+
+@media (max-width:767px){
+
+	.col-xs-0{
+		display: none;
+	}
+
+	.error404 h1{
+		font-size:75px;
+		text-shadow:2px 2px 1px #dadada;
+	}
+
+  .muestra{
+    position: relative;
+    float: left;
+    width:  100px;
+    height: 100px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+}
