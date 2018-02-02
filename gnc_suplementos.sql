@@ -208,6 +208,7 @@ CREATE TABLE `facturacion` (
 
 LOCK TABLES `facturacion` WRITE;
 /*!40000 ALTER TABLE `facturacion` DISABLE KEYS */;
+INSERT INTO `facturacion` VALUES (1,1,1,3,1000.000,'2017-10-02 10:00:00',2),(2,2,2,3,5000.000,'2018-01-01 11:00:00',2),(3,3,3,3,4000.000,'2017-09-05 14:00:00',2),(4,4,4,6,3500.000,'2018-01-09 13:00:00',5),(5,5,7,9,4600.000,'2018-01-02 10:00:00',5),(6,6,12,6,3500.000,'2017-08-07 14:00:00',5),(7,7,7,2,780.000,'2017-07-11 14:00:00',5),(8,8,8,8,3400.000,'2016-09-08 00:00:00',9),(9,9,4,6,789.000,'2018-01-08 10:00:00',5),(10,10,4,10,500.000,'2018-01-11 15:00:00',5);
 /*!40000 ALTER TABLE `facturacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,6 +242,7 @@ CREATE TABLE `membresia` (
 
 LOCK TABLES `membresia` WRITE;
 /*!40000 ALTER TABLE `membresia` DISABLE KEYS */;
+INSERT INTO `membresia` VALUES (1,1,3,'2018-01-01','2019-01-01','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(2,2,3,'2017-06-14','2018-06-14','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(3,3,3,'2017-05-08','2018-05-08','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(4,4,1,'2017-04-11','2018-04-11','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(5,5,2,'2017-11-06','2018-11-06','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(6,6,2,'2017-11-06','2018-11-06','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(7,7,4,'2017-08-20','2018-08-20','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(8,8,5,'2017-07-31','2018-08-31','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(9,9,6,'2018-01-02','2019-01-02','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL),(10,10,7,'2017-12-01','2018-12-01','GOLD CARD','20% de descuento. 2DO al 50% de descuento del 1 al 7 de cada mes.',NULL);
 /*!40000 ALTER TABLE `membresia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,6 +277,7 @@ CREATE TABLE `pedido` (
 
 LOCK TABLES `pedido` WRITE;
 /*!40000 ALTER TABLE `pedido` DISABLE KEYS */;
+INSERT INTO `pedido` VALUES (1,1,1,1,'2017-07-04 13:00:00',1,'Libertad #5947','Puebla','Mexico'),(2,2,2,2,'2017-11-07 14:00:00',1,'Margaritas #8880','Veracruz','Mexico'),(3,3,3,3,'2018-01-01 10:00:00',1,'Zavaleta #778','Puebla','Mexico'),(4,4,4,4,'2018-01-25 10:00:00',0,'Priv. Heroes #332','Puebla','Mexico'),(5,5,6,5,'2018-01-04 08:00:00',1,'Xicotencatl #440','Puebla','Mexico'),(6,6,6,6,'2018-01-17 16:00:00',1,'Limas #550','Tlaxcala','Mexico'),(7,7,7,7,'2018-01-23 17:00:00',0,'Atlixcayotl #2250','Monterrey','Mexico'),(8,8,8,8,'2018-01-24 18:00:00',0,'Zavaleta #770','Mexico','Mexico'),(9,9,9,9,'2018-01-25 08:00:00',0,'14 Sur #1330','Chihuahua','Mexico'),(10,10,10,10,'2018-01-04 14:00:00',1,'Villas de Atlixco #440','Puebla','Mexico');
 /*!40000 ALTER TABLE `pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +315,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche',NULL,1),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate',NULL,1),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas',NULL,1),(4,5,7,8,38,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina',NULL,1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda',NULL,1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas',NULL,1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas',NULL,1),(9,9,11,2,34,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio',NULL,1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias',NULL,1);
+INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',0),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',0),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',0),(4,5,7,8,38,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1),(9,9,11,2,34,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',1);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -459,7 +462,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000),(2,2,2,3,'2018-01-01 00:00:00',5000.000),(3,3,2,3,'2017-09-05 00:00:00',4000.000),(4,4,5,6,'2018-01-09 00:00:00',3500.000),(5,7,5,9,'2018-01-02 00:00:00',4600.000),(6,12,5,6,'2017-08-07 00:00:00',3500.000),(7,7,5,2,'2017-07-11 00:00:00',780.000),(8,8,9,8,'2016-09-06 00:00:00',3400.000),(9,4,5,6,'2018-01-08 00:00:00',789.000),(10,4,5,10,'2018-01-10 00:00:00',500.000);
+INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000),(2,2,2,3,'2018-01-01 00:00:00',5000.000),(3,3,2,3,'2017-09-05 00:00:00',4000.000),(4,4,5,6,'2018-01-09 00:00:00',3500.000),(5,7,5,9,'2018-01-02 00:00:00',4600.000),(6,12,5,6,'2017-08-07 00:00:00',3500.000),(7,7,5,2,'2017-07-11 00:00:00',780.000),(8,8,9,8,'2016-09-06 00:00:00',3400.000),(9,4,5,6,'2018-01-08 00:00:00',789.000),(10,4,5,10,'2018-01-10 00:00:00',500.000),(11,6,6,8,'2018-01-09 00:00:00',1800.000),(12,10,4,8,'2017-12-12 00:00:00',1800.000),(13,7,3,9,'2018-01-16 00:00:00',1718.000);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -472,4 +475,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-25 13:37:52
+-- Dump completed on 2018-02-02 10:52:05
