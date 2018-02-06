@@ -103,7 +103,7 @@ CREATE TABLE `detalle_venta` (
 
 LOCK TABLES `detalle_venta` WRITE;
 /*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
-INSERT INTO `detalle_venta` VALUES (1,1,2,4,80.000,20.000,16.000),(2,1,6,10,900.000,78.000,16.000),(3,1,9,7,90.000,25.000,10.000),(4,3,6,9,90.000,20.000,13.000),(5,3,7,4,240.000,17.000,16.000),(6,6,9,2,290.000,15.000,30.000),(7,6,8,30,340.000,25.000,16.000),(8,7,8,24,450.000,10.000,16.000),(9,5,9,20,670.000,5.000,10.000),(10,8,2,23,789.000,23.000,13.000),(11,1,1,10,20.000,20.000,16.000),(41,1,4,20,89.000,0.000,16.000),(42,1,4,20,89.000,0.000,16.000),(56,56,4,2,89.000,0.000,16.000);
+INSERT INTO `detalle_venta` VALUES (56,56,4,2,89.000,0.000,16.000);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -333,7 +333,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',0),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',0),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',0),(4,5,7,8,16,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1),(9,9,11,2,4,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',0);
+INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',1),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',1),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',1),(4,5,7,8,16,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1),(7,2,6,3,40,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1),(9,9,11,2,40,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',1),(11,1,1,1,30,400.000,'Ganador Masa','Eleva tu nivel de masa muscular','vistas/img/productos/ganador.png',1),(12,1,2,1,40,700.000,'Proteína Isolate','Con un buen porcentaje de carbohidratos','vistas/img/productos/isolate.png',1),(13,1,1,1,29,800.000,'Quemadores de grasa','Para reducir tu porcentaje de grasa corporal','vistas/img/productos/quemador.jpg',1),(14,1,1,1,30,789.000,'Quemador Arnold','Motívate con el quemador del famoso Arnold','vistas/img/productos/quemador-arnold.png',1),(15,1,1,1,38,200.000,'Quemador BPI','El mejor quemador de la región','vistas/img/productos/bpi-quemador.png',1),(16,1,1,2,47,300.000,'Sudadera para entrenar','Para motivarte al 100','vistas/img/productos/sudadera.png',1),(17,1,1,1,56,200.000,'Mancuerna 2kg','Para bombear ese bicep','vistas/img/productos/mancuerna.png',1),(18,1,1,1,67,389.000,'Barra Pecho','Para que entrenes como los grandes','vistas/img/productos/barra.jpg',1),(19,1,1,1,35,400.000,'Glutamina','Para el entrenamiento','vistas/img/productos/glutamina.png',1),(20,1,1,1,57,390.000,'Glutamina DNA','Para fortalecer los músculos durante el entreno','vistas/img/productos/glutamina-dna.png',1),(21,1,1,1,78,390.000,'Galletas Avena POWER','Recupera esos carbos','vistas/img/productos/galletas-power.png',1);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +481,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000,NULL),(2,2,2,3,'2018-01-01 00:00:00',5000.000,NULL),(3,3,2,3,'2017-09-05 00:00:00',4000.000,NULL),(4,4,5,6,'2018-01-09 00:00:00',3500.000,NULL),(5,7,5,9,'2018-01-02 00:00:00',4600.000,NULL),(6,12,5,6,'2017-08-07 00:00:00',3500.000,NULL),(7,7,5,2,'2017-07-11 00:00:00',780.000,NULL),(8,8,9,8,'2016-09-06 00:00:00',3400.000,NULL),(9,4,5,6,'2018-01-08 00:00:00',789.000,NULL),(10,4,5,10,'2018-01-10 00:00:00',500.000,NULL),(11,6,6,8,'2018-01-09 00:00:00',1800.000,NULL),(12,10,4,8,'2017-12-12 00:00:00',1800.000,NULL),(13,7,3,9,'2018-01-16 00:00:00',1718.000,NULL),(14,1,1,1,'2018-02-05 16:08:21',200.000,NULL),(56,1,1,1,'2018-02-05 19:31:00',178.000,'Suriel Asael');
+INSERT INTO `venta` VALUES (56,1,1,1,'2018-02-05 19:31:00',178.000,'Suriel Asael');
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -494,4 +494,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-05 23:01:38
+-- Dump completed on 2018-02-06  0:34:30
