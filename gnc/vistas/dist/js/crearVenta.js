@@ -13,11 +13,44 @@ $(document).ready(function(){
 			//bootbox.alert(response);
 			//parent.fadeOut('slow');
 			var dataa = $.parseJSON(response);
-			/*$.each(dataa, function(i, item) {
-			    console.log(item.cantidad);
-			});*/
-			localStorage.setItem("datos", dataa.cantidad);
-			console.log(localStorage.datos['cantidad']);
+			var cantidades = new Array();
+			var precio_ventas = new Array();
+			var productos = new Array();
+			var total;
+			var myTableProductos =  "<table class='table table-striped table-hover'>" +
+                                "  <thead>"+
+                                "    <tr>"+                                
+                                "      <th class='text-center'>Cantidad</th>" +       
+                                "      <th class='text-center'>Precio Venta</th>" +
+                                "      <th class='text-center'>Producto</th>" +
+                                "      <th class='text-center'>Total</th>" +                                 
+                                "    </tr>" +
+                                "  </thead>" +
+                                "  <tbody>";
+			
+
+			$.each(dataa, function(i, item) {
+			    //console.log(item.cantidad);		
+			    total = parseInt(item.cantidad) * parseInt(item.precio_venta);
+
+
+			    myTableProductos +=      "<tr>" +                                                                        
+                                    "   <td class='text-center'>" + item.cantidad + "</td>" +                                       
+                                    "   <td class='text-center'>" + item.precio_venta + "</td>" +
+                                    "   <td class='text-center'>" + item.nombre + "</td>" + 
+                                    "   <td class='text-primary text-center'>$ "+ total +"</td>" +
+                                    "</tr>";  
+
+
+			});
+
+			myTableProductos += "</tbody>" +
+                            "</table>";
+			
+          	bootbox.dialog({
+				message: myTableProductos,
+				title: "Detalle de la Venta",			
+			});			
 		})
 		.fail(function(){
 			bootbox.alert('Error....');

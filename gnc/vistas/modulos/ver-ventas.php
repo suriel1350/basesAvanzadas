@@ -36,7 +36,7 @@ DETALLES VENTA
 							<td class="text-center">'.$value["total_venta"].'</td>
 							<td class="text-center">'.$value["nombre_cliente"].'</td>
 							<td class="text-center">
-								<a href="" class="show-detalles" data-detalles-id="'.$value["idventa"].'" data-target="#'.$value["idventa"].'" data-toggle="modal"><button class="btn btn-primary">Detalles</button></a>							
+								<a href="" class="show-detalles" data-detalles-id="'.$value["idventa"].'"><button class="btn btn-primary">Detalles</button></a>							
 							</td>
 						</tr>
 
@@ -54,14 +54,8 @@ DETALLES VENTA
 						        <div class="modal-body">
 						          <div class="row">					          						        
 									
-									<div class="col-md-6">
-				                        <div class="rating">
-				                            <span class="fa fa-star"></span>
-				                            <span class="fa fa-star"></span>
-				                            <span class="fa fa-star"></span>
-				                            <span class="fa fa-star"></span>
-				                            <span class="fa fa-star"></span>                            
-				                        </div>
+									<div class="col-md-6" class="lstDetalles">
+				                        
 									</div>
 
 						          </div>
