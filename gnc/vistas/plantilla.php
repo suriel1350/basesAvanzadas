@@ -36,6 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/style.css">
+  <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/bootstrap-select.min.css">
   
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
@@ -185,6 +186,14 @@ desired effect
             
             include "modulos/productos.php";
           
+          }else if($rutas[0] == "ventas"){
+
+            include "modulos/ventas.php";
+          
+          }else if($rutas[0] == "ver-ventas"){
+            include "modulos/ver-ventas.php";
+          }else if($rutas[0] == "detalles-venta"){
+            include "modulos/detalles-venta.php";
           }else{
 
             include "modulos/error404.php";
@@ -233,7 +242,9 @@ desired effect
 <script src="<?php echo $url; ?>vistas/dist/js/adminlte.min.js"></script>
 
 <script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/delete.js"></script>
-  <script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/crearVenta.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/bootbox.min.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/bootstrap-select.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

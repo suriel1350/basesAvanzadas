@@ -82,7 +82,7 @@ DROP TABLE IF EXISTS `detalle_venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_venta` (
-  `iddetalleventa` int(11) NOT NULL,
+  `iddetalleventa` int(11) NOT NULL AUTO_INCREMENT,
   `idventa` int(11) DEFAULT NULL,
   `idproducto` int(11) DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE `detalle_venta` (
   KEY `idproducto` (`idproducto`),
   CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`idventa`) REFERENCES `venta` (`idventa`),
   CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,9 +103,27 @@ CREATE TABLE `detalle_venta` (
 
 LOCK TABLES `detalle_venta` WRITE;
 /*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
-INSERT INTO `detalle_venta` VALUES (1,1,2,4,80.000,20.000,16.000),(2,1,6,10,900.000,78.000,16.000),(3,1,9,7,90.000,25.000,10.000),(4,3,6,9,90.000,20.000,13.000),(5,3,7,4,240.000,17.000,16.000),(6,6,9,2,290.000,15.000,30.000),(7,6,8,30,340.000,25.000,16.000),(8,7,8,24,450.000,10.000,16.000),(9,5,9,20,670.000,5.000,10.000),(10,8,2,23,789.000,23.000,13.000);
+INSERT INTO `detalle_venta` VALUES (1,1,2,4,80.000,20.000,16.000),(2,1,6,10,900.000,78.000,16.000),(3,1,9,7,90.000,25.000,10.000),(4,3,6,9,90.000,20.000,13.000),(5,3,7,4,240.000,17.000,16.000),(6,6,9,2,290.000,15.000,30.000),(7,6,8,30,340.000,25.000,16.000),(8,7,8,24,450.000,10.000,16.000),(9,5,9,20,670.000,5.000,10.000),(10,8,2,23,789.000,23.000,13.000),(11,1,1,10,20.000,20.000,16.000),(41,1,4,20,89.000,0.000,16.000),(42,1,4,20,89.000,0.000,16.000),(56,56,4,2,89.000,0.000,16.000);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_updStockVenta` AFTER INSERT ON `detalle_venta` FOR EACH ROW BEGIN
+UPDATE producto SET stock = stock - NEW.cantidad
+WHERE producto.idproducto = NEW.idproducto;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `devoluciones`
@@ -191,14 +209,14 @@ CREATE TABLE `facturacion` (
   `fecha_facturacion` datetime DEFAULT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   PRIMARY KEY (`idfacturacion`),
-  KEY `idventa` (`idventa`),
   KEY `idcliente` (`idcliente`),
   KEY `idempleado` (`idempleado`),
   KEY `idsucursal` (`idsucursal`),
-  CONSTRAINT `facturacion_ibfk_1` FOREIGN KEY (`idventa`) REFERENCES `venta` (`idventa`),
+  KEY `idventa` (`idventa`),
   CONSTRAINT `facturacion_ibfk_2` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `facturacion_ibfk_3` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`),
-  CONSTRAINT `facturacion_ibfk_4` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`)
+  CONSTRAINT `facturacion_ibfk_4` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`),
+  CONSTRAINT `facturacion_ibfk_5` FOREIGN KEY (`idventa`) REFERENCES `venta` (`idventa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -315,7 +333,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',0),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',0),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',0),(4,5,7,8,38,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1),(9,9,11,2,34,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',1);
+INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',0),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',0),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',0),(4,5,7,8,16,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1),(7,2,6,3,10,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1),(9,9,11,2,4,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',0);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,12 +458,13 @@ DROP TABLE IF EXISTS `venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `venta` (
-  `idventa` int(11) NOT NULL,
+  `idventa` int(11) NOT NULL AUTO_INCREMENT,
   `idcliente` int(11) DEFAULT NULL,
   `idsucursal` int(11) DEFAULT NULL,
   `idempleado` int(11) DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
   `total_venta` decimal(11,3) DEFAULT NULL,
+  `nombre_cliente` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idventa`),
   KEY `idcliente` (`idcliente`),
   KEY `idsucursal` (`idsucursal`),
@@ -453,7 +472,7 @@ CREATE TABLE `venta` (
   CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`),
   CONSTRAINT `venta_ibfk_3` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,7 +481,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000),(2,2,2,3,'2018-01-01 00:00:00',5000.000),(3,3,2,3,'2017-09-05 00:00:00',4000.000),(4,4,5,6,'2018-01-09 00:00:00',3500.000),(5,7,5,9,'2018-01-02 00:00:00',4600.000),(6,12,5,6,'2017-08-07 00:00:00',3500.000),(7,7,5,2,'2017-07-11 00:00:00',780.000),(8,8,9,8,'2016-09-06 00:00:00',3400.000),(9,4,5,6,'2018-01-08 00:00:00',789.000),(10,4,5,10,'2018-01-10 00:00:00',500.000),(11,6,6,8,'2018-01-09 00:00:00',1800.000),(12,10,4,8,'2017-12-12 00:00:00',1800.000),(13,7,3,9,'2018-01-16 00:00:00',1718.000);
+INSERT INTO `venta` VALUES (1,1,2,3,'2017-10-02 00:00:00',1000.000,NULL),(2,2,2,3,'2018-01-01 00:00:00',5000.000,NULL),(3,3,2,3,'2017-09-05 00:00:00',4000.000,NULL),(4,4,5,6,'2018-01-09 00:00:00',3500.000,NULL),(5,7,5,9,'2018-01-02 00:00:00',4600.000,NULL),(6,12,5,6,'2017-08-07 00:00:00',3500.000,NULL),(7,7,5,2,'2017-07-11 00:00:00',780.000,NULL),(8,8,9,8,'2016-09-06 00:00:00',3400.000,NULL),(9,4,5,6,'2018-01-08 00:00:00',789.000,NULL),(10,4,5,10,'2018-01-10 00:00:00',500.000,NULL),(11,6,6,8,'2018-01-09 00:00:00',1800.000,NULL),(12,10,4,8,'2017-12-12 00:00:00',1800.000,NULL),(13,7,3,9,'2018-01-16 00:00:00',1718.000,NULL),(14,1,1,1,'2018-02-05 16:08:21',200.000,NULL),(56,1,1,1,'2018-02-05 19:31:00',178.000,'Suriel Asael');
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -475,4 +494,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-02 10:52:05
+-- Dump completed on 2018-02-05 23:01:38

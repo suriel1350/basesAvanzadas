@@ -10,7 +10,7 @@ $servidor = Ruta::ctrRutaServidor();
 
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		
-		<a href="#">
+		<a href="ventas">
 				
 			<button class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12 btnIndex">
 									
@@ -34,7 +34,7 @@ $servidor = Ruta::ctrRutaServidor();
 
 		<br>
 
-		<a href="#">
+		<a href="ver-ventas">
 				
 			<button class="btn btn-success col-lg-12 col-md-12 col-sm-12 col-xs-12 btnIndex">
 									
