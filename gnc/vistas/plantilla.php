@@ -22,26 +22,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
-  <link rel="icon" href="<?php echo $url; ?>vistas/img/favicon.ico">
+  <link rel="icon" href="vistas/img/favicon.ico">
 
   <!--=====================================
   PLUGINS DE CSS
   ======================================-->
   
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vistas/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="vistas/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="vistas/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/style.css">
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="vistas/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="vistas/dist/css/style.css">
+  <link rel="stylesheet" href="vistas/dist/css/bootstrap-select.min.css">
   
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="<?php echo $url; ?>vistas/dist/css/skins/skin-red.min.css">
+  <link rel="stylesheet" href="vistas/dist/css/skins/skin-red.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -106,7 +106,7 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $url; ?>vistas/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="vistas/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Usuario</p>
@@ -154,41 +154,52 @@ desired effect
         $rutas = array();
         $ruta = null;
         
-        if(isset($_GET["ruta"])){
+        $valor = $_SERVER['REQUEST_URI'];
+        $valorN = explode("/", $valor);        
+
+        //echo $valorN[2];        
+
+        /*if($valorN[2] == null)
+          echo "aAlgo";
+        else
+          echo $valorN[2];*/
+
+        if( $valorN[2] == null ){
           
-          $rutas = explode("/", $_GET["ruta"]);
-          $valor = $rutas[0];
+          /*=============================================
+          BOTONES INICIO
+          ===============================================
+          */
+
+          include "modulos/botones.php";
+
+        }else{
 
           /*=============================================
           LISTA BLANCA DE URL'S AMIGABLES
           =============================================*/
 
-          if($rutas[0] == "productos") {
-            
-            include "modulos/productos.php";
-          
-          }else if($rutas[0] == "ventas"){
-
-            include "modulos/ventas.php";
-          
-          }else if($rutas[0] == "ver-ventas"){
+          if($valorN[2] == "productos") {            
+            include "modulos/productos.php";          
+          }else if($valorN[2] == "ventas"){
+            include "modulos/ventas.php";          
+          }else if($valorN[2] == "ver-ventas"){
             include "modulos/ver-ventas.php";
-          }else if($rutas[0] == "detalles-venta"){
+          }else if($valorN[2] == "detalles-venta"){
             include "modulos/detalles-venta.php";
-          }else{
+          }else if($valorN[2] == "error-transaccion"){
+            include "modulos/error-transaccion.php";
+          }else if($valorN[2] == "ver-ordenes"){
+            include "modulos/ver-ordenes.php";
+          }else if($valorN[2] == "categorias"){
+            include "modulos/categorias.php";
+          }else if($valorN[2] == "ventas-hora"){
+            include "modulos/ventas-hora.php";
+          }else {
 
             include "modulos/error404.php";
 
           }
-
-
-        }else{
-
-          /*=============================================
-          BOTONES DE INICIO
-          =============================================*/
-
-          include "modulos/botones.php"; 
         
         }
 
@@ -216,16 +227,18 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="<?php echo $url; ?>vistas/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<?php echo $url; ?>vistas/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vistas/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo $url; ?>vistas/dist/js/adminlte.min.js"></script>
+<script src="vistas/dist/js/adminlte.min.js"></script>
 
-<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/delete.js"></script>
-<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/crearVenta.js"></script>
-<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/bootbox.min.js"></script>
-<script type="text/javascript" src="<?php echo $url; ?>vistas/dist/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="vistas/dist/js/abastecerStock.js"></script>
+<script type="text/javascript" src="vistas/dist/js/mostrarProductosCategorias.js"></script>
+<script type="text/javascript" src="vistas/dist/js/delete.js"></script>
+<script type="text/javascript" src="vistas/dist/js/crearVenta.js"></script>
+<script type="text/javascript" src="vistas/dist/js/bootbox.min.js"></script>
+<script type="text/javascript" src="vistas/dist/js/bootstrap-select.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
