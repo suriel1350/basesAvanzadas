@@ -6,7 +6,18 @@ $servidor = Ruta::ctrRutaServidor();
 
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-		<h3>Productos disponibles <a href="/gnc" style="padding-right: 10px;"><button class="btn btn-success">Regresar al Menú</button></a></h3>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-center">
+			<h3>Productos disponibles <a href="/gnc" style="padding-right: 10px;"><button class="btn btn-success">Regresar al Menú</button></a></h3>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+			<h3> <a href="categorias" style="padding-right: 10px;"><button class="btn btn-warning">Categorías</button></a></h3>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+			<h3> <a href="ventas" style="padding-right: 10px;"><button class="btn btn-primary">Ventas</button></a></h3>
+		</div>
+		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+			<h3> <a href="comprar-productos" style="padding-right: 10px;"><button class="btn btn-primary">Compras</button></a></h3>
+		</div>
 		<!--include('fabrica.producto.search'-->
 	</div>
 </div>
@@ -26,7 +37,7 @@ VITRINA DE PRODUCTOS
 			foreach ($productos as $key => $value) {	
 								  								
 		    echo '<div class="col-xs-6 col-md-4">
-		       		<div class="text-center product tumbnail thumbnail-3"><a href="" data-target="#'.$value["idproducto"].'" data-toggle="modal"><img src="'.$servidor.$value["imagen"].'" alt="" class="img-thumbnail muestra"></a>
+		       		<div class="text-center product tumbnail thumbnail-3"><a href="" data-target="#'.$value["idproducto"].'" data-toggle="modal"><img src="'.$value["imagen"].'" alt="" class="img-thumbnail muestra"></a>
 		         		<div class="caption text-center">
 		           			<h4><a href="" data-target="#'.$value["idproducto"].'" data-toggle="modal">'.$value["nombre"].'</a></h4><span class="price">
 		             		<a href="" data-target="#'.$value["idproducto"].'" data-toggle="modal"><button class="btn btn-primary fa fa-info"></button></a>
@@ -53,7 +64,7 @@ VITRINA DE PRODUCTOS
 				          <div class="row">
 				          	
 				          	<div class="col-md-4 text-center product tumbnail thumbnail-3">
-								<a href="#"><img src="'.$servidor.$value["imagen"].'" alt="" class="img-thumbnail muestra"></a>
+								<a href="#"><img src="'.$value["imagen"].'" alt="" class="img-thumbnail muestra"></a>
 							</div>
 							
 							<div class="col-md-6">

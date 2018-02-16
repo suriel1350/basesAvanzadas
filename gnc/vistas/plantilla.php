@@ -163,45 +163,50 @@ desired effect
           echo "aAlgo";
         else
           echo $valorN[2];*/
-
-        if( $valorN[2] == null ){
+        if(isset($_GET["ruta"])){
           
-          /*=============================================
-          BOTONES INICIO
-          ===============================================
-          */
-
-          include "modulos/botones.php";
-
-        }else{
+          $rutas = explode("/", $_GET["ruta"]);
+          $valor = $rutas[0];
 
           /*=============================================
           LISTA BLANCA DE URL'S AMIGABLES
           =============================================*/
 
-          if($valorN[2] == "productos") {            
+          if($rutas[0] == "productos") {            
             include "modulos/productos.php";          
-          }else if($valorN[2] == "ventas"){
+          }else if($rutas[0] == "ventas"){
             include "modulos/ventas.php";          
-          }else if($valorN[2] == "ver-ventas"){
+          }else if($rutas[0] == "ver-ventas"){
             include "modulos/ver-ventas.php";
-          }else if($valorN[2] == "detalles-venta"){
+          }else if($rutas[0] == "detalles-venta"){
             include "modulos/detalles-venta.php";
-          }else if($valorN[2] == "error-transaccion"){
+          }else if($rutas[0] == "error-transaccion"){
             include "modulos/error-transaccion.php";
-          }else if($valorN[2] == "ver-ordenes"){
+          }else if($rutas[0] == "ver-ordenes"){
             include "modulos/ver-ordenes.php";
-          }else if($valorN[2] == "categorias"){
+          }else if($rutas[0] == "categorias"){
             include "modulos/categorias.php";
-          }else if($valorN[2] == "ventas-hora"){
+          }else if($rutas[0] == "ventas-hora"){
             include "modulos/ventas-hora.php";
+          }else if($rutas[0] == "comprar-productos"){
+            include "modulos/comprar-productos.php";
           }else {
 
             include "modulos/error404.php";
 
           }
+
+
+        }else{
+
+          /*=============================================
+          BOTONES DE INICIO
+          =============================================*/
+
+          include "modulos/botones.php"; 
         
         }
+        
 
 
       ?>
@@ -236,6 +241,7 @@ desired effect
 <script type="text/javascript" src="vistas/dist/js/abastecerStock.js"></script>
 <script type="text/javascript" src="vistas/dist/js/mostrarProductosCategorias.js"></script>
 <script type="text/javascript" src="vistas/dist/js/delete.js"></script>
+<script type="text/javascript" src="vistas/dist/js/compra.js"></script>
 <script type="text/javascript" src="vistas/dist/js/crearVenta.js"></script>
 <script type="text/javascript" src="vistas/dist/js/bootbox.min.js"></script>
 <script type="text/javascript" src="vistas/dist/js/bootstrap-select.min.js"></script>

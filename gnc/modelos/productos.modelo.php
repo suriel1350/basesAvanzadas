@@ -6,6 +6,20 @@ class ModeloProductos{
 
 	static public function mdlMostrarProductos($tabla){
 
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE condicion = 1 and stock > 0");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
+	static public function mdlMostrarProductosCompra($tabla){
+
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE condicion = 1");
 
 		$stmt -> execute();

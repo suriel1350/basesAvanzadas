@@ -6,7 +6,7 @@ class ModeloVentas{
 
 	static public function mdlCrearVenta($tabla, $cantidades, $idproductos, $precio_ventas, $total_venta, $nombre_cliente){
 		//$sql = "INSERT INTO auto2 (idauto,nombrec,idmarca, ac) values(null, ?, ?, ?)";			
-
+		$resul;
 		$pdo = Conexion::conectar();
 		
 		$pdo->beginTransaction();
@@ -22,12 +22,28 @@ class ModeloVentas{
 
 			for ($i=0; $i < count($idproductos) ; $i++) { 
 				
-			
-				$sql = "INSERT INTO detalle_venta (idventa, idproducto, cantidad, precio_venta, descuento, impuesto) values($last_id, $idproductos[$i], $cantidades[$i], $precio_ventas[$i], 0, 16)";
 				
-				$stmt = $pdo->prepare($sql);
+				$procedure = "CALL GetStock($idproductos[$i], @stocks)";
+				$stmt = $pdo->prepare($procedure);
+				$stmt->execute();
 
-				$stmt -> execute();
+				$procedure = "SELECT @stocks";
+				foreach ($pdo->query($procedure) as $row) {
+						$resul = $row["@stocks"];
+					}	
+
+				if($resul - $cantidades[$i] < 0)
+				{
+					$pdo->rollBack();
+				}
+				else
+				{
+					$sql = "INSERT INTO detalle_venta (idventa, idproducto, cantidad, precio_venta, descuento, impuesto) values($last_id, $idproductos[$i], $cantidades[$i], $precio_ventas[$i], 0, 16)";
+				
+					$stmt = $pdo->prepare($sql);
+
+					$stmt -> execute();
+				}
 
 			}
 
@@ -40,7 +56,7 @@ class ModeloVentas{
 			$stmt = null;
 		}
 		catch(Exception $e){
-			echo $e->getMessage();
+			echo '<script>window.location = "/gnc/error-transaccion";</script>';				
 
 			$pdo->rollBack();
 
@@ -49,6 +65,19 @@ class ModeloVentas{
 	}
 
 	static public function mdlMostrarVenta($tabla){
+
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+		$stmt -> execute();
+
+		return $stmt -> fetchAll();
+
+		$stmt -> close();
+
+		$stmt = null;
+	}
+
+	static public function mdlObtenerVentasHora($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
 

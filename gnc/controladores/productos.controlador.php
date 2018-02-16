@@ -3,7 +3,7 @@
 class ControladorProductos{
 
 	/*=============================================
-	MOSTRAR PRODUCTOS
+	MOSTRAR PRODUCTOS DISPONIBLES PARA VENTA
 	=============================================*/
 
 	public function ctrMostrarProductos(){
@@ -11,6 +11,20 @@ class ControladorProductos{
 		$tabla = "producto";
 
 		$respuesta = ModeloProductos::mdlMostrarProductos($tabla);
+
+		return $respuesta;
+		
+	}
+
+	/*=============================================
+	MOSTRAR PRODUCTOS DISPONIBLES PARA COMPRA
+	=============================================*/
+
+	public function ctrMostrarProductosCompra(){
+
+		$tabla = "producto";
+
+		$respuesta = ModeloProductos::mdlMostrarProductosCompra($tabla);
 
 		return $respuesta;
 		

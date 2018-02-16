@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$resultado = ControladorVentas::ctrCrearVenta($cantidades, $idproductos, $precio_ventas, $total_venta,$nombre_cliente);	
 	
 	echo '<script>window.location = "/gnc";</script>';	
+
 }
 
 ?>	

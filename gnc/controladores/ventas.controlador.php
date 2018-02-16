@@ -24,4 +24,14 @@ class ControladorVentas{
 		return $respuesta;
 		
 	}
+
+	public function ctrObtenerVentasHora(){
+
+		$tabla = "salesPerHour";
+
+		$respuesta = ModeloVentas::mdlObtenerVentasHora($tabla);
+
+		return $respuesta;
+		
+	}
 }
