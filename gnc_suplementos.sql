@@ -75,6 +75,92 @@ INSERT INTO `cliente` VALUES (1,1,'Fernando Castillo Cosme','Libertad #5947, San
 UNLOCK TABLES;
 
 --
+-- Table structure for table `compra`
+--
+
+DROP TABLE IF EXISTS `compra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `compra` (
+  `idcompra` int(11) NOT NULL AUTO_INCREMENT,
+  `idcliente` int(11) DEFAULT NULL,
+  `idsucursal` int(11) DEFAULT NULL,
+  `idempleado` int(11) DEFAULT NULL,
+  `fecha_hora` datetime DEFAULT NULL,
+  `total_compra` decimal(11,3) DEFAULT NULL,
+  `empresa_compra` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idcompra`),
+  KEY `idcliente` (`idcliente`),
+  KEY `idsucursal` (`idsucursal`),
+  KEY `idempleado` (`idempleado`),
+  CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
+  CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`),
+  CONSTRAINT `compra_ibfk_3` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `compra`
+--
+
+LOCK TABLES `compra` WRITE;
+/*!40000 ALTER TABLE `compra` DISABLE KEYS */;
+INSERT INTO `compra` VALUES (1,1,1,1,'2018-02-15 19:51:39',8000.000,'Strength FIT'),(2,1,1,1,'2018-02-15 19:56:00',9000.000,'Bull Dog');
+/*!40000 ALTER TABLE `compra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `detalle_compra`
+--
+
+DROP TABLE IF EXISTS `detalle_compra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `detalle_compra` (
+  `iddetallecompra` int(11) NOT NULL AUTO_INCREMENT,
+  `idcompra` int(11) DEFAULT NULL,
+  `idproducto` int(11) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `precio_compra` decimal(11,3) DEFAULT NULL,
+  `descuento` decimal(11,3) DEFAULT NULL,
+  `impuesto` decimal(11,3) DEFAULT NULL,
+  PRIMARY KEY (`iddetallecompra`),
+  KEY `idcompra` (`idcompra`),
+  KEY `idproducto` (`idproducto`),
+  CONSTRAINT `detalle_compra_ibfk_1` FOREIGN KEY (`idcompra`) REFERENCES `compra` (`idcompra`),
+  CONSTRAINT `detalle_compra_ibfk_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `detalle_compra`
+--
+
+LOCK TABLES `detalle_compra` WRITE;
+/*!40000 ALTER TABLE `detalle_compra` DISABLE KEYS */;
+INSERT INTO `detalle_compra` VALUES (1,1,1,10,800.000,0.000,16.000),(2,2,1,10,900.000,0.000,16.000);
+/*!40000 ALTER TABLE `detalle_compra` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_updStockCompra` AFTER INSERT ON `detalle_compra` FOR EACH ROW BEGIN
+UPDATE producto SET stock = stock + NEW.cantidad
+WHERE producto.idproducto = NEW.idproducto;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
 -- Table structure for table `detalle_venta`
 --
 
@@ -94,7 +180,7 @@ CREATE TABLE `detalle_venta` (
   KEY `idproducto` (`idproducto`),
   CONSTRAINT `detalle_venta_ibfk_1` FOREIGN KEY (`idventa`) REFERENCES `venta` (`idventa`),
   CONSTRAINT `detalle_venta_ibfk_2` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +189,7 @@ CREATE TABLE `detalle_venta` (
 
 LOCK TABLES `detalle_venta` WRITE;
 /*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
-INSERT INTO `detalle_venta` VALUES (56,56,4,2,89.000,0.000,16.000);
+INSERT INTO `detalle_venta` VALUES (56,56,4,2,89.000,0.000,16.000),(57,57,3,2,145.000,0.000,16.000),(58,58,1,10,980.000,0.000,16.000),(59,59,1,10,980.000,0.000,16.000),(60,60,2,30,1024.000,0.000,16.000),(62,62,3,98,145.000,0.000,16.000),(67,67,4,16,89.000,0.000,16.000),(68,68,6,2,78.000,0.000,16.000),(69,69,6,43,78.000,0.000,16.000),(70,70,7,3,178.000,0.000,16.000),(71,71,7,2,178.000,0.000,16.000),(72,72,7,30,178.000,0.000,16.000),(73,73,7,10,178.000,0.000,16.000),(74,74,7,7,178.000,0.000,16.000),(75,74,7,3,178.000,0.000,16.000),(76,75,7,10,178.000,0.000,16.000),(77,76,14,10,789.000,0.000,16.000),(78,77,8,2,567.000,0.000,16.000),(79,78,8,2,567.000,0.000,16.000),(80,80,8,2,567.000,0.000,16.000),(81,81,8,2,567.000,0.000,16.000),(82,82,8,2,567.000,0.000,16.000),(83,83,8,2,567.000,0.000,16.000),(84,84,8,2,567.000,0.000,16.000),(85,85,8,2,567.000,0.000,16.000),(86,86,8,2,567.000,0.000,16.000),(87,87,8,1,567.000,0.000,16.000),(88,88,8,1,567.000,0.000,16.000),(89,89,8,1,567.000,0.000,16.000),(90,97,8,1,567.000,0.000,16.000),(91,98,8,1,567.000,0.000,16.000),(92,99,8,1,567.000,0.000,16.000),(93,100,8,2,567.000,0.000,16.000),(94,101,8,1,567.000,0.000,16.000),(95,102,8,1,567.000,0.000,16.000),(96,103,8,1,567.000,0.000,16.000),(97,104,8,1,567.000,0.000,16.000),(98,105,17,1,200.000,0.000,56.000),(99,106,8,10,567.000,0.000,16.000),(100,107,8,5,567.000,0.000,16.000),(101,108,8,5,567.000,0.000,16.000),(102,109,14,20,789.000,0.000,16.000),(103,110,14,10,789.000,0.000,16.000),(104,111,11,20,400.000,0.000,16.000),(105,112,11,10,400.000,0.000,16.000),(106,114,9,40,567.000,0.000,16.000),(107,116,10,30,457.000,0.000,16.000),(108,118,12,40,700.000,0.000,16.000),(109,119,4,2,89.000,0.000,16.000),(110,120,1,10,980.000,0.000,16.000),(111,121,4,2,89.000,0.000,16.000),(112,122,19,35,400.000,0.000,16.000),(113,123,4,10,89.000,0.000,16.000),(114,124,4,10,89.000,0.000,16.000),(115,125,21,78,390.000,0.000,16.000),(116,126,4,36,89.000,0.000,16.000),(117,130,13,15,800.000,0.000,16.000);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -118,6 +204,26 @@ DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_updStockVenta` AFTER INSERT ON `detalle_venta` FOR EACH ROW BEGIN
 UPDATE producto SET stock = stock - NEW.cantidad
 WHERE producto.idproducto = NEW.idproducto;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_ordProductos` AFTER INSERT ON `detalle_venta` FOR EACH ROW BEGIN
+IF (select producto.stock from producto where producto.idproducto = NEW.idproducto) = 0 THEN
+INSERT INTO purchaseOrders(idproducto, product_name, products_ordered, products_in_stock, date_time_of_order, estado) values (NEW.idproducto, (select p.nombre from producto p where p.idproducto = NEW.idproducto), (select p.ordenar from producto p where p.idproducto = NEW.idproducto), (select p.stock from producto p where p.idproducto = NEW.idproducto), NOW(), "Pendiente");
+END IF;
+
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -317,6 +423,7 @@ CREATE TABLE `producto` (
   `descripcion` varchar(256) DEFAULT NULL,
   `imagen` varchar(100) DEFAULT NULL,
   `condicion` tinyint(1) DEFAULT NULL,
+  `ordenar` int(11) DEFAULT NULL,
   PRIMARY KEY (`idproducto`),
   KEY `idcategoria` (`idcategoria`),
   KEY `idsucursal` (`idsucursal`),
@@ -333,7 +440,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,2,3,4,20,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',1),(2,8,3,3,30,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',1),(3,4,2,1,100,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',1),(4,5,7,8,16,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1),(6,7,7,2,45,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1),(7,2,6,3,40,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1),(8,6,6,3,45,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1),(9,9,11,2,40,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1),(10,4,10,6,30,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',1),(11,1,1,1,30,400.000,'Ganador Masa','Eleva tu nivel de masa muscular','vistas/img/productos/ganador.png',1),(12,1,2,1,40,700.000,'Proteína Isolate','Con un buen porcentaje de carbohidratos','vistas/img/productos/isolate.png',1),(13,1,1,1,29,800.000,'Quemadores de grasa','Para reducir tu porcentaje de grasa corporal','vistas/img/productos/quemador.jpg',1),(14,1,1,1,30,789.000,'Quemador Arnold','Motívate con el quemador del famoso Arnold','vistas/img/productos/quemador-arnold.png',1),(15,1,1,1,38,200.000,'Quemador BPI','El mejor quemador de la región','vistas/img/productos/bpi-quemador.png',1),(16,1,1,2,47,300.000,'Sudadera para entrenar','Para motivarte al 100','vistas/img/productos/sudadera.png',1),(17,1,1,1,56,200.000,'Mancuerna 2kg','Para bombear ese bicep','vistas/img/productos/mancuerna.png',1),(18,1,1,1,67,389.000,'Barra Pecho','Para que entrenes como los grandes','vistas/img/productos/barra.jpg',1),(19,1,1,1,35,400.000,'Glutamina','Para el entrenamiento','vistas/img/productos/glutamina.png',1),(20,1,1,1,57,390.000,'Glutamina DNA','Para fortalecer los músculos durante el entreno','vistas/img/productos/glutamina-dna.png',1),(21,1,1,1,78,390.000,'Galletas Avena POWER','Recupera esos carbos','vistas/img/productos/galletas-power.png',1);
+INSERT INTO `producto` VALUES (1,2,3,4,0,980.000,'Gold Standard Whey','Proteina de Suero de Leche','vistas/img/productos/whey.png',1,60),(2,8,3,3,0,1024.000,'MP Muscle','Proteina de suero de leche sabor chocolate','vistas/img/productos/mpmuscle.png',1,60),(3,4,2,1,0,145.000,'Vitamina C','Frasco con 180 Capsulas','vistas/img/productos/vitaminac.jpg',1,60),(4,5,7,8,0,89.000,'Barra Avena','Mezcla de chocolate, avena y proteina','vistas/img/productos/avenabarra.png',1,60),(6,7,7,2,60,78.000,'Barra Quinoa','Exquisita mezcla de quinoa, avena y Splenda','vistas/img/productos/barraquinoa.png',1,60),(7,2,6,3,60,178.000,'Mochila 3 en 1','Lleva tus comidas, shakers y pastillas','vistas/img/productos/mochila.png',1,60),(8,6,6,3,0,567.000,'Faja reductora','Para quemar esos kilos de mas','vistas/img/productos/faja.jpg',1,60),(9,9,11,2,0,567.000,'Diablo Power Oxido','Para hacer de tu entrenamiento mas duradero y sin cansancio','vistas/img/productos/oxido.png',1,60),(10,4,10,6,0,457.000,'Omega 3','Ideal antes del cardio para quemar mas calorias','vistas/img/productos/omega3.png',1,60),(11,1,1,1,0,400.000,'Ganador Masa','Eleva tu nivel de masa muscular','vistas/img/productos/ganador.png',1,60),(12,1,2,1,0,700.000,'Proteína Isolate','Con un buen porcentaje de carbohidratos','vistas/img/productos/isolate.png',1,60),(13,1,1,1,14,800.000,'Quemadores de grasa','Para reducir tu porcentaje de grasa corporal','vistas/img/productos/quemador.jpg',1,60),(14,1,1,1,0,789.000,'Quemador Arnold','Motívate con el quemador del famoso Arnold','vistas/img/productos/quemador-arnold.png',1,60),(15,1,1,1,38,200.000,'Quemador BPI','El mejor quemador de la región','vistas/img/productos/bpi-quemador.png',1,60),(16,1,1,2,47,300.000,'Sudadera para entrenar','Para motivarte al 100','vistas/img/productos/sudadera.png',1,60),(17,1,1,1,55,200.000,'Mancuerna 2kg','Para bombear ese bicep','vistas/img/productos/mancuerna.png',1,60),(18,1,1,1,67,389.000,'Barra Pecho','Para que entrenes como los grandes','vistas/img/productos/barra.jpg',1,60),(19,1,1,1,0,400.000,'Glutamina','Para el entrenamiento','vistas/img/productos/glutamina.png',1,60),(20,1,1,1,57,390.000,'Glutamina DNA','Para fortalecer los músculos durante el entreno','vistas/img/productos/glutamina-dna.png',1,60),(21,1,1,1,0,390.000,'Galletas Avena POWER','Recupera esos carbos','vistas/img/productos/galletas-power.png',1,60);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,6 +473,62 @@ LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
 INSERT INTO `proveedor` VALUES (1,3,'Juan Lopez','Av Emiliano Zapata #200','juan@juan.com','Puebla','Mexico'),(2,4,'Marcos JImenez','Blvd 5 Mayo #450','marcos@marcos.com','Veracruz','Mexico'),(3,3,'Michell Muñoz','Av las torres #590','michell@michell.com','Puebla','Mexico'),(4,8,'Pedro Lopez','Av Juarez #245','pedro@pedro.com','Morelos','Mexico'),(5,8,'Andres Juarez','Prolongacion Galeana #245','andres@andres.com','Veracruz','Mexico'),(6,4,'suriel rosas','Av Concepcion la cruz #226','suriel@suriel.com','Puebla','Mexico'),(7,1,'Asael Mendez','Blvd. Atlixcayotl #2343','asael@asael.com','Morelos','Mexico'),(8,2,'Mike Johnson','Penn Station #234','mike@mike.com','Nueva York','USA'),(9,2,'Lucas Freeman','Penn Station #234','lucas@lucas.com','California','USA'),(10,2,'Jerry Fernandez','Birdman avenue #892','jerry@jerry.com','California','USA'),(11,7,'Mark Santos','Penn Station #234','mark@mark.com','Florida','USA');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `purchaseOrders`
+--
+
+DROP TABLE IF EXISTS `purchaseOrders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `purchaseOrders` (
+  `idpurchaseorders` int(11) NOT NULL AUTO_INCREMENT,
+  `idproducto` int(11) DEFAULT NULL,
+  `product_name` varchar(256) DEFAULT NULL,
+  `products_ordered` int(11) DEFAULT NULL,
+  `products_in_stock` int(11) DEFAULT NULL,
+  `date_time_of_order` datetime DEFAULT NULL,
+  `estado` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idpurchaseorders`),
+  KEY `idproducto` (`idproducto`),
+  CONSTRAINT `purchaseOrders_ibfk_1` FOREIGN KEY (`idproducto`) REFERENCES `producto` (`idproducto`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `purchaseOrders`
+--
+
+LOCK TABLES `purchaseOrders` WRITE;
+/*!40000 ALTER TABLE `purchaseOrders` DISABLE KEYS */;
+INSERT INTO `purchaseOrders` VALUES (1,2,'prueba',60,60,'2018-02-12 22:51:00','Bien'),(2,4,'Barra Avena',60,60,'2018-02-12 23:10:25','Bien'),(3,6,'Barra Quinoa',60,0,'2018-02-12 23:13:25','Bien'),(4,7,'Mochila 3 en 1',60,0,'2018-02-13 12:29:19','Bien'),(5,8,'Faja reductora',60,0,'2018-02-13 18:28:18','Pendiente'),(6,14,'Quemador Arnold',60,0,'2018-02-13 18:32:33','Pendiente'),(7,11,'Ganador Masa',60,0,'2018-02-13 18:50:49','Pendiente'),(8,9,'Diablo Power Oxido',60,0,'2018-02-13 18:52:57','Pendiente'),(9,10,'Omega 3',60,0,'2018-02-13 19:03:38','Pendiente'),(10,12,'Proteína Isolate',60,0,'2018-02-13 22:46:41','Pendiente'),(11,1,'Gold Standard Whey',60,0,'2018-02-15 20:01:28','Pendiente'),(12,19,'Glutamina',60,0,'2018-02-15 20:43:47','Pendiente'),(13,21,'Galletas Avena POWER',60,0,'2018-02-16 12:11:19','Pendiente'),(14,4,'Barra Avena',60,0,'2018-02-16 12:13:37','Pendiente');
+/*!40000 ALTER TABLE `purchaseOrders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `salesPerHour`
+--
+
+DROP TABLE IF EXISTS `salesPerHour`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `salesPerHour` (
+  `idsalesperhour` int(11) NOT NULL AUTO_INCREMENT,
+  `total_sales` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`idsalesperhour`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `salesPerHour`
+--
+
+LOCK TABLES `salesPerHour` WRITE;
+/*!40000 ALTER TABLE `salesPerHour` DISABLE KEYS */;
+INSERT INTO `salesPerHour` VALUES (1,1,NULL),(2,10,NULL),(14,3,'2018-02-12 21:25:43'),(22,2,'2018-02-12 22:02:50'),(23,2,'2018-02-12 23:02:50'),(24,7,'2018-02-13 13:02:50'),(25,1,'2018-02-13 14:02:50'),(26,0,'2018-02-13 15:02:50'),(27,0,'2018-02-13 16:02:50'),(28,0,'2018-02-13 17:02:50'),(29,11,'2018-02-13 18:02:50'),(30,17,'2018-02-13 19:02:50'),(31,0,'2018-02-13 20:54:55'),(32,0,'2018-02-13 21:02:50'),(33,0,'2018-02-13 22:02:50'),(34,1,'2018-02-13 23:02:50'),(35,2,'2018-02-15 20:02:50'),(36,1,'2018-02-15 21:02:50'),(37,0,'2018-02-15 22:02:50'),(38,2,'2018-02-16 11:04:59'),(39,1,'2018-02-16 12:04:59'),(40,3,'2018-02-16 13:04:59');
+/*!40000 ALTER TABLE `salesPerHour` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -472,7 +635,7 @@ CREATE TABLE `venta` (
   CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`),
   CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`idsucursal`) REFERENCES `sucursal` (`idsucursal`),
   CONSTRAINT `venta_ibfk_3` FOREIGN KEY (`idempleado`) REFERENCES `empleado` (`idempleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -481,7 +644,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (56,1,1,1,'2018-02-05 19:31:00',178.000,'Suriel Asael');
+INSERT INTO `venta` VALUES (56,1,1,1,'2018-02-05 19:31:00',178.000,'Suriel Asael'),(57,1,1,1,'2018-02-12 21:17:03',290.000,'Suriel'),(58,1,1,1,'2018-02-12 21:17:18',9800.000,'Suriel'),(59,1,1,1,'2018-02-12 22:40:44',9800.000,'Asael'),(60,1,1,1,'2018-02-12 22:51:00',30720.000,'Mike'),(62,1,1,1,'2018-02-12 23:06:53',14210.000,'Prubea'),(67,1,1,1,'2018-02-12 23:10:25',1424.000,'NUEVO'),(68,1,1,1,'2018-02-12 23:11:10',156.000,'MIGUEL'),(69,1,1,1,'2018-02-12 23:13:25',3354.000,'Luke'),(70,1,1,1,'2018-02-13 12:20:02',534.000,'werwewer'),(71,1,1,1,'2018-02-13 12:20:57',356.000,''),(72,1,1,1,'2018-02-13 12:29:18',5340.000,'danperez'),(73,1,1,1,'2018-02-13 12:29:19',1780.000,'moni'),(74,1,1,1,'2018-02-13 12:29:19',1780.000,'BOB2'),(75,1,1,1,'2018-02-13 12:29:21',1780.000,'Pantufla'),(76,1,1,1,'2018-02-13 12:29:21',7890.000,'Arnold Schwarzenegger'),(77,1,1,1,'2018-02-13 13:07:21',1134.000,'Suriel'),(78,1,1,1,'2018-02-13 17:41:38',1134.000,'HAHAHA'),(80,1,1,1,'2018-02-13 17:44:17',1134.000,'hshshs'),(81,1,1,1,'2018-02-13 17:45:36',1134.000,'hahaha'),(82,1,1,1,'2018-02-13 17:45:56',1134.000,'hahaha'),(83,1,1,1,'2018-02-13 17:49:02',1134.000,'Hola'),(84,1,1,1,'2018-02-13 17:49:27',1134.000,'Hola'),(85,1,1,1,'2018-02-13 17:49:43',1134.000,'Suriel'),(86,1,1,1,'2018-02-13 17:50:20',1134.000,'suriel'),(87,1,1,1,'2018-02-13 17:51:47',567.000,'ssjajja'),(88,1,1,1,'2018-02-13 17:54:41',567.000,'ss'),(89,1,1,1,'2018-02-13 17:55:50',567.000,'suriel'),(97,1,1,1,'2018-02-13 18:18:46',567.000,'sshshs'),(98,1,1,1,'2018-02-13 18:20:19',567.000,'shshs'),(99,1,1,1,'2018-02-13 18:21:05',567.000,'sss'),(100,1,1,1,'2018-02-13 18:21:55',1134.000,'hshss'),(101,1,1,1,'2018-02-13 18:22:06',567.000,'sssss'),(102,1,1,1,'2018-02-13 18:22:29',567.000,'jjjaj'),(103,1,1,1,'2018-02-13 18:23:07',567.000,'hhhhhhh'),(104,1,1,1,'2018-02-13 18:23:43',567.000,'bbbbb'),(105,1,1,1,'2018-02-13 18:24:55',200.000,'prueba fin'),(106,1,1,1,'2018-02-13 18:27:20',5670.000,'Suriel'),(107,1,1,1,'2018-02-13 18:28:18',2835.000,'ASAEL'),(108,1,1,1,'2018-02-13 18:28:18',2835.000,'Test Fer'),(109,1,1,1,'2018-02-13 18:32:33',15780.000,'Test Fer'),(110,1,1,1,'2018-02-13 18:32:34',7890.000,'Suriel'),(111,1,1,1,'2018-02-13 18:50:02',8000.000,'SURIEL'),(112,1,1,1,'2018-02-13 18:50:49',4000.000,'PRUEBA PROCEDURE'),(114,1,1,1,'2018-02-13 18:52:57',22680.000,'ASAEL '),(116,1,1,1,'2018-02-13 19:03:38',13710.000,'Testt'),(118,1,1,1,'2018-02-13 22:46:41',28000.000,'SURIEL'),(119,1,1,1,'2018-02-14 13:33:07',178.000,'FEBRERO 14'),(120,1,1,1,'2018-02-15 20:01:28',9800.000,'Luke'),(121,1,1,1,'2018-02-15 20:02:08',178.000,'Chochos'),(122,1,1,1,'2018-02-15 20:43:47',14000.000,'Test iPhone'),(123,1,1,1,'2018-02-16 11:53:18',890.000,'Test EVENTO'),(124,1,1,1,'2018-02-16 11:02:00',890.000,'SURIEL'),(125,1,1,1,'2018-02-16 12:11:19',30420.000,'TEST TRIGGER'),(126,1,1,1,'2018-02-16 12:13:37',3204.000,'Test Iphone'),(130,1,1,1,'2018-02-16 12:15:07',12000.000,'test Stored Procedure 2');
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -494,4 +657,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-06  0:34:30
+-- Dump completed on 2018-02-16 13:05:24
