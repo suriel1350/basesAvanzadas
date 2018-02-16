@@ -1,0 +1,56 @@
+CREATE EVENT ventas_por_hora
+ON SCHEDULE EVERY 1 HOUR
+STARTS CURRENT_TIMESTAMP
+ENDS CURRENT_TIMESTAMP + INTERVAL 5 MINUTE
+DO
+   INSERT INTO salesPerHour(total_sales)
+   VALUES(10);
+
+----------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE EVENT ventas_por_hora
+   ON SCHEDULE EVERY 1 HOUR
+        DO BEGIN
+                IF (HOUR(CURRENT_TIMESTAMP) BETWEEN 5 AND 23) THEN
+                START TRANSACTION;    
+		insert into salesPerHour(total_sales, created_at) values( (select count(*)
+from venta where fecha_hora >= DATE_SUB(NOW(),INTERVAL 1 HOUR)), NOW());
+		COMMIT;
+                END IF;
+        END $$
+DELIMITER ;
+------------------------------------------------------------------------------------------------
+
+(select p.nombre from producto p where p.idproducto = NEW.idproducto)
+(select p.ordenar from producto p where p.idproducto = NEW.idproducto)
+(select p.stock from producto p where p.idproducto = NEW.idproducto)
+-----------------------------------------------------------------------------------------------
+DELIMITER $$
+CREATE TRIGGER `tr_ordProductos` AFTER INSERT ON `detalle_venta` FOR EACH ROW BEGIN
+IF (select producto.stock from producto where producto.idproducto = NEW.idproducto) = 0 THEN
+	INSERT INTO purchaseOrders(idproducto, product_name, products_ordered, products_in_stock, date_time_of_order, estado) values (NEW.idproducto, (select p.nombre from producto p where p.idproducto = NEW.idproducto), (select p.ordenar from producto p where p.idproducto = NEW.idproducto), (select p.stock from producto p where p.idproducto = NEW.idproducto), NOW(), "Pendiente");
+END IF;
+
+END $$
+DELIMITER ; 2018-02-05 19:31:00
+
+------------------------------------------------------------------------------------------------
+DELIMITER $$
+   CREATE FUNCTION detalles(fecha_hora datetime, fecha date) RETURNS VARCHAR(30)
+   DETERMINISTIC
+   BEGIN 
+     	DECLARE cliente VARCHAR(30);
+	
+	IF(fecha_hora > fecha AND fecha_hora < CONCAT(fecha, '23:59:59')) THEN
+		SET cliente = DATE_FORMAT(fecha_hora, '%m-%d-%Y');
+	ELSE 
+		SET cliente = "No";
+	END IF;
+
+	RETURN (cliente);
+   END
+   $$ 
+DELIMITER ;
+-------------------------------------------------------------------------------------------------
+SELECT HOUR(CURRENT_TIMESTAMP);
+select v.nombre_cliente, p.nombre,v.total_venta, d.cantidad, detalles(fecha_hora, '2018-02-16') as detalle from venta v, detalle_venta d, producto p where detalles(fecha_hora, '2018-02-16') != "No" and v.idventa = d.idventa and d.idproducto = p.idproducto;
