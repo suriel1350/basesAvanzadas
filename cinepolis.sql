@@ -31,6 +31,22 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
+-- Name: registra_movimiento(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION registra_movimiento() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+   BEGIN
+      UPDATE membresia SET puntos_acumulados = puntos_acumulados + 50 WHERE membresia.idmembresia = NEW.idmembresia;
+      RETURN NEW;
+   END;   
+$$;
+
+
+ALTER FUNCTION public.registra_movimiento() OWNER TO usuario7;
+
+--
 -- Name: show_asientos(integer); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -45,7 +61,7 @@ CREATE FUNCTION show_asientos(funcion_id integer) RETURNS integer
     $$;
 
 
-ALTER FUNCTION public.show_asientos(funcion_id integer) OWNER TO postgres;
+ALTER FUNCTION public.show_asientos(funcion_id integer) OWNER TO usuario7;
 
 --
 -- Name: show_funciones(character, date); Type: FUNCTION; Schema: public; Owner: postgres
@@ -63,7 +79,7 @@ end;
 $$;
 
 
-ALTER FUNCTION public.show_funciones(cine_nombre character, dia_fecha date) OWNER TO postgres;
+ALTER FUNCTION public.show_funciones(cine_nombre character, dia_fecha date) OWNER TO usuario7;
 
 --
 -- Name: show_movimientos(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -81,7 +97,7 @@ end;
 $$;
 
 
-ALTER FUNCTION public.show_movimientos(membresia_id integer) OWNER TO postgres;
+ALTER FUNCTION public.show_movimientos(membresia_id integer) OWNER TO usuario7;
 
 --
 -- Name: total_puntos_membresia(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -99,7 +115,7 @@ CREATE FUNCTION total_puntos_membresia(membresia_id integer) RETURNS integer
  $$;
 
 
-ALTER FUNCTION public.total_puntos_membresia(membresia_id integer) OWNER TO postgres;
+ALTER FUNCTION public.total_puntos_membresia(membresia_id integer) OWNER TO usuario7;
 
 --
 -- Name: totalventa(integer); Type: FUNCTION; Schema: public; Owner: postgres
@@ -117,7 +133,29 @@ CREATE FUNCTION totalventa(venta_id integer) RETURNS real
  $$;
 
 
-ALTER FUNCTION public.totalventa(venta_id integer) OWNER TO postgres;
+ALTER FUNCTION public.totalventa(venta_id integer) OWNER TO usuario7;
+
+--
+-- Name: venta_asientos(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION venta_asientos() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+   BEGIN
+       UPDATE funciones SET asientos = asientos - NEW.cantidad_boletos
+       WHERE funciones.idfunciones = NEW.idfunciones; 
+       IF (select f.asientos 
+        from funciones f 
+        where f.idfunciones = NEW.idfunciones) = 0 THEN
+        UPDATE funciones SET disponible = 'no' WHERE idfunciones = NEW.idfunciones;
+     END IF;     
+      RETURN NEW;      
+   END;
+$$;
+
+
+ALTER FUNCTION public.venta_asientos() OWNER TO usuario7;
 
 SET default_tablespace = '';
 
@@ -136,7 +174,7 @@ CREATE TABLE alimentos (
 );
 
 
-ALTER TABLE alimentos OWNER TO postgres;
+ALTER TABLE alimentos OWNER TO usuario7;
 
 --
 -- Name: alimentos_idalimentos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -150,7 +188,7 @@ CREATE SEQUENCE alimentos_idalimentos_seq
     CACHE 1;
 
 
-ALTER TABLE alimentos_idalimentos_seq OWNER TO postgres;
+ALTER TABLE alimentos_idalimentos_seq OWNER TO usuario7;
 
 --
 -- Name: alimentos_idalimentos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -173,7 +211,7 @@ CREATE TABLE boletos (
 );
 
 
-ALTER TABLE boletos OWNER TO postgres;
+ALTER TABLE boletos OWNER TO usuario7;
 
 --
 -- Name: boletos_idboletos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -187,7 +225,7 @@ CREATE SEQUENCE boletos_idboletos_seq
     CACHE 1;
 
 
-ALTER TABLE boletos_idboletos_seq OWNER TO postgres;
+ALTER TABLE boletos_idboletos_seq OWNER TO usuario7;
 
 --
 -- Name: boletos_idboletos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -207,7 +245,7 @@ CREATE TABLE caja (
 );
 
 
-ALTER TABLE caja OWNER TO postgres;
+ALTER TABLE caja OWNER TO usuario7;
 
 --
 -- Name: caja_idcaja_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -221,7 +259,7 @@ CREATE SEQUENCE caja_idcaja_seq
     CACHE 1;
 
 
-ALTER TABLE caja_idcaja_seq OWNER TO postgres;
+ALTER TABLE caja_idcaja_seq OWNER TO usuario7;
 
 --
 -- Name: caja_idcaja_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -242,7 +280,7 @@ CREATE TABLE cartelera (
 );
 
 
-ALTER TABLE cartelera OWNER TO postgres;
+ALTER TABLE cartelera OWNER TO usuario7;
 
 --
 -- Name: cartelera_idcartelera_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -256,7 +294,7 @@ CREATE SEQUENCE cartelera_idcartelera_seq
     CACHE 1;
 
 
-ALTER TABLE cartelera_idcartelera_seq OWNER TO postgres;
+ALTER TABLE cartelera_idcartelera_seq OWNER TO usuario7;
 
 --
 -- Name: cartelera_idcartelera_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -275,7 +313,7 @@ CREATE TABLE categoria (
 );
 
 
-ALTER TABLE categoria OWNER TO postgres;
+ALTER TABLE categoria OWNER TO usuario7;
 
 --
 -- Name: categoria_idcategoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -289,7 +327,7 @@ CREATE SEQUENCE categoria_idcategoria_seq
     CACHE 1;
 
 
-ALTER TABLE categoria_idcategoria_seq OWNER TO postgres;
+ALTER TABLE categoria_idcategoria_seq OWNER TO usuario7;
 
 --
 -- Name: categoria_idcategoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -311,7 +349,7 @@ CREATE TABLE cine (
 );
 
 
-ALTER TABLE cine OWNER TO postgres;
+ALTER TABLE cine OWNER TO usuario7;
 
 --
 -- Name: cine_idcine_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -325,7 +363,7 @@ CREATE SEQUENCE cine_idcine_seq
     CACHE 1;
 
 
-ALTER TABLE cine_idcine_seq OWNER TO postgres;
+ALTER TABLE cine_idcine_seq OWNER TO usuario7;
 
 --
 -- Name: cine_idcine_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -345,11 +383,13 @@ CREATE TABLE detalle_venta (
     idfunciones integer NOT NULL,
     idboletos integer NOT NULL,
     cantidad integer NOT NULL,
-    precio_venta real NOT NULL
+    precio_venta real NOT NULL,
+    cantidad_boletos integer,
+    idmembresia integer
 );
 
 
-ALTER TABLE detalle_venta OWNER TO postgres;
+ALTER TABLE detalle_venta OWNER TO usuario7;
 
 --
 -- Name: detalle_venta_iddetalleventa_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -363,7 +403,7 @@ CREATE SEQUENCE detalle_venta_iddetalleventa_seq
     CACHE 1;
 
 
-ALTER TABLE detalle_venta_iddetalleventa_seq OWNER TO postgres;
+ALTER TABLE detalle_venta_iddetalleventa_seq OWNER TO usuario7;
 
 --
 -- Name: detalle_venta_iddetalleventa_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -385,7 +425,7 @@ CREATE TABLE empleado (
 );
 
 
-ALTER TABLE empleado OWNER TO postgres;
+ALTER TABLE empleado OWNER TO usuario7;
 
 --
 -- Name: empleado_idempleado_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -399,7 +439,7 @@ CREATE SEQUENCE empleado_idempleado_seq
     CACHE 1;
 
 
-ALTER TABLE empleado_idempleado_seq OWNER TO postgres;
+ALTER TABLE empleado_idempleado_seq OWNER TO usuario7;
 
 --
 -- Name: empleado_idempleado_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -425,7 +465,7 @@ CREATE TABLE fans (
 );
 
 
-ALTER TABLE fans OWNER TO postgres;
+ALTER TABLE fans OWNER TO usuario7;
 
 --
 -- Name: fans_idfans_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -439,7 +479,7 @@ CREATE SEQUENCE fans_idfans_seq
     CACHE 1;
 
 
-ALTER TABLE fans_idfans_seq OWNER TO postgres;
+ALTER TABLE fans_idfans_seq OWNER TO usuario7;
 
 --
 -- Name: fans_idfans_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -459,11 +499,12 @@ CREATE TABLE funciones (
     asientos integer NOT NULL,
     horario text NOT NULL,
     sala text NOT NULL,
-    fecha date
+    fecha date,
+    disponible character(10)
 );
 
 
-ALTER TABLE funciones OWNER TO postgres;
+ALTER TABLE funciones OWNER TO usuario7;
 
 --
 -- Name: funciones_idfunciones_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -477,7 +518,7 @@ CREATE SEQUENCE funciones_idfunciones_seq
     CACHE 1;
 
 
-ALTER TABLE funciones_idfunciones_seq OWNER TO postgres;
+ALTER TABLE funciones_idfunciones_seq OWNER TO usuario7;
 
 --
 -- Name: funciones_idfunciones_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -501,7 +542,7 @@ CREATE TABLE membresia (
 );
 
 
-ALTER TABLE membresia OWNER TO postgres;
+ALTER TABLE membresia OWNER TO usuario7;
 
 --
 -- Name: membresia_idmembresia_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -515,7 +556,7 @@ CREATE SEQUENCE membresia_idmembresia_seq
     CACHE 1;
 
 
-ALTER TABLE membresia_idmembresia_seq OWNER TO postgres;
+ALTER TABLE membresia_idmembresia_seq OWNER TO usuario7;
 
 --
 -- Name: membresia_idmembresia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -537,7 +578,7 @@ CREATE TABLE movimientos (
 );
 
 
-ALTER TABLE movimientos OWNER TO postgres;
+ALTER TABLE movimientos OWNER TO usuario7;
 
 --
 -- Name: movimientos_idmovimientos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -551,7 +592,7 @@ CREATE SEQUENCE movimientos_idmovimientos_seq
     CACHE 1;
 
 
-ALTER TABLE movimientos_idmovimientos_seq OWNER TO postgres;
+ALTER TABLE movimientos_idmovimientos_seq OWNER TO usuario7;
 
 --
 -- Name: movimientos_idmovimientos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -576,7 +617,7 @@ CREATE TABLE peliculas (
 );
 
 
-ALTER TABLE peliculas OWNER TO postgres;
+ALTER TABLE peliculas OWNER TO usuario7;
 
 --
 -- Name: peliculas_idpelicula_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -590,7 +631,7 @@ CREATE SEQUENCE peliculas_idpelicula_seq
     CACHE 1;
 
 
-ALTER TABLE peliculas_idpelicula_seq OWNER TO postgres;
+ALTER TABLE peliculas_idpelicula_seq OWNER TO usuario7;
 
 --
 -- Name: peliculas_idpelicula_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -613,7 +654,7 @@ CREATE TABLE tarjetas (
 );
 
 
-ALTER TABLE tarjetas OWNER TO postgres;
+ALTER TABLE tarjetas OWNER TO usuario7;
 
 --
 -- Name: tarjetas_idtarjeta_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -627,7 +668,7 @@ CREATE SEQUENCE tarjetas_idtarjeta_seq
     CACHE 1;
 
 
-ALTER TABLE tarjetas_idtarjeta_seq OWNER TO postgres;
+ALTER TABLE tarjetas_idtarjeta_seq OWNER TO usuario7;
 
 --
 -- Name: tarjetas_idtarjeta_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -648,11 +689,12 @@ CREATE TABLE venta (
     idcine integer NOT NULL,
     total_venta real NOT NULL,
     fecha timestamp without time zone NOT NULL,
-    metodo_pago text NOT NULL
+    metodo_pago text NOT NULL,
+    idmembresia integer
 );
 
 
-ALTER TABLE venta OWNER TO postgres;
+ALTER TABLE venta OWNER TO usuario7;
 
 --
 -- Name: venta_idventa_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -666,7 +708,7 @@ CREATE SEQUENCE venta_idventa_seq
     CACHE 1;
 
 
-ALTER TABLE venta_idventa_seq OWNER TO postgres;
+ALTER TABLE venta_idventa_seq OWNER TO usuario7;
 
 --
 -- Name: venta_idventa_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -934,17 +976,23 @@ SELECT pg_catalog.setval('cine_idcine_seq', 1, false);
 -- Data for Name: detalle_venta; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY detalle_venta (iddetalleventa, idventa, idalimentos, idfunciones, idboletos, cantidad, precio_venta) FROM stdin;
-1	2	9	2	1	2	123
-2	3	9	6	4	6	34
-3	4	10	7	5	7	45
-4	1	3	5	6	8	56
-5	2	2	4	2	9	67
-6	4	1	3	3	10	18
-7	5	6	2	4	34	90
-8	6	3	7	5	23	90
-9	7	5	8	6	12	12
-10	8	8	9	7	11	12
+COPY detalle_venta (iddetalleventa, idventa, idalimentos, idfunciones, idboletos, cantidad, precio_venta, cantidad_boletos, idmembresia) FROM stdin;
+11	9	5	5	1	2	10	29	\N
+12	9	5	5	1	2	10	1	\N
+13	9	10	5	1	2	10	50	\N
+14	9	10	10	1	2	10	50	\N
+15	1	1	6	1	2	10	10	\N
+1	2	9	2	1	2	123	\N	1
+2	3	9	6	4	6	34	\N	2
+3	4	10	7	5	7	45	\N	3
+4	1	3	5	6	8	56	\N	4
+5	2	2	4	2	9	67	\N	5
+6	4	1	3	3	10	18	\N	6
+7	5	6	2	4	34	90	\N	7
+8	6	3	7	5	23	90	\N	8
+9	7	5	8	6	12	12	\N	9
+10	8	8	9	7	11	12	\N	10
+17	1	1	6	1	2	10	10	9
 \.
 
 
@@ -1009,17 +1057,17 @@ SELECT pg_catalog.setval('fans_idfans_seq', 1, false);
 -- Data for Name: funciones; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY funciones (idfunciones, idpelicula, idcine, asientos, horario, sala, fecha) FROM stdin;
-1	2	7	34	18.30	2	2017-05-07
-2	3	5	45	15.30	3	2017-05-08
-3	9	1	50	17.50	2	2017-05-09
-6	4	2	60	23.00	6	2017-05-09
-9	5	9	60	16.50	2	2017-05-09
-10	7	1	50	13.45	5	2017-05-09
-4	8	4	40	19.00	1	2017-05-12
-5	7	3	30	20.30	6	2017-05-12
-7	6	1	45	23.55	3	2017-05-12
-8	5	9	50	18.45	7	2017-05-12
+COPY funciones (idfunciones, idpelicula, idcine, asientos, horario, sala, fecha, disponible) FROM stdin;
+1	2	7	34	18.30	2	2017-05-07	si        
+2	3	5	45	15.30	3	2017-05-08	si        
+3	9	1	50	17.50	2	2017-05-09	si        
+4	8	4	40	19.00	1	2017-05-12	si        
+7	6	1	45	23.55	3	2017-05-12	si        
+8	5	9	50	18.45	7	2017-05-12	si        
+9	5	9	60	16.50	2	2017-05-09	si        
+5	7	3	-50	20.30	6	2017-05-12	si        
+10	7	1	0	13.45	5	2017-05-09	no        
+6	4	2	40	23.00	6	2017-05-09	si        
 \.
 
 
@@ -1043,8 +1091,8 @@ COPY membresia (idmembresia, idfans, num_tarjeta, fecha_caducidad, tipo, puntos_
 6	9	8910920	2017-05-07 21:50:02	super fan                                         	192	2
 7	1	9202002	2017-05-07 21:50:02	super fan                                         	190	2
 8	8	92001020	2017-05-07 21:50:02	fan                                               	89	2
-9	5	92010029	2017-05-07 21:50:02	super fan                                         	789	2
 10	6	92020202	2017-05-07 21:50:02	fanatico                                          	198	2
+9	5	92010029	2017-05-07 21:50:02	super fan                                         	839	2
 \.
 
 
@@ -1134,17 +1182,17 @@ SELECT pg_catalog.setval('tarjetas_idtarjeta_seq', 1, false);
 -- Data for Name: venta; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY venta (idventa, idfans, idcaja, idempleado, idcine, total_venta, fecha, metodo_pago) FROM stdin;
-1	2	9	1	1	980	2017-05-07 21:50:02	efectivo
-2	3	9	4	2	182	2017-05-07 21:50:02	tarjeta
-3	2	2	5	1	234	2017-05-07 21:50:02	tarjeta
-4	3	3	2	3	456	2017-05-07 21:50:02	efectivo
-5	4	2	3	4	345	2017-05-07 21:50:02	tarjeta
-6	5	4	1	1	765	2017-05-07 21:50:02	tarjeta
-7	5	6	2	7	987	2017-05-07 21:50:02	efectivo
-8	6	6	9	8	890	2017-05-07 21:50:02	efectivo
-9	8	7	10	2	189	2017-05-07 21:50:02	efectivo
-10	8	8	7	9	78	2017-05-07 21:50:02	tarjeta
+COPY venta (idventa, idfans, idcaja, idempleado, idcine, total_venta, fecha, metodo_pago, idmembresia) FROM stdin;
+1	2	9	1	1	980	2017-05-07 21:50:02	efectivo	1
+2	3	9	4	2	182	2017-05-07 21:50:02	tarjeta	2
+3	2	2	5	1	234	2017-05-07 21:50:02	tarjeta	3
+4	3	3	2	3	456	2017-05-07 21:50:02	efectivo	4
+5	4	2	3	4	345	2017-05-07 21:50:02	tarjeta	5
+6	5	4	1	1	765	2017-05-07 21:50:02	tarjeta	6
+7	5	6	2	7	987	2017-05-07 21:50:02	efectivo	7
+8	6	6	9	8	890	2017-05-07 21:50:02	efectivo	8
+9	8	7	10	2	189	2017-05-07 21:50:02	efectivo	9
+10	8	8	7	9	78	2017-05-07 21:50:02	tarjeta	10
 \.
 
 
@@ -1276,6 +1324,20 @@ ALTER TABLE ONLY venta
 
 
 --
+-- Name: detalle_venta movimiento_membresia_trigger; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER movimiento_membresia_trigger AFTER INSERT ON detalle_venta FOR EACH ROW EXECUTE PROCEDURE registra_movimiento();
+
+
+--
+-- Name: detalle_venta venta_asiento_trigger; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER venta_asiento_trigger AFTER INSERT ON detalle_venta FOR EACH ROW EXECUTE PROCEDURE venta_asientos();
+
+
+--
 -- Name: alimentos alimentos_idcategoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1353,6 +1415,14 @@ ALTER TABLE ONLY detalle_venta
 
 ALTER TABLE ONLY detalle_venta
     ADD CONSTRAINT detalle_venta_idfunciones_fkey FOREIGN KEY (idfunciones) REFERENCES funciones(idfunciones);
+
+
+--
+-- Name: detalle_venta detalle_venta_idmembresia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalle_venta
+    ADD CONSTRAINT detalle_venta_idmembresia_fkey FOREIGN KEY (idmembresia) REFERENCES membresia(idmembresia);
 
 
 --
@@ -1473,6 +1543,14 @@ ALTER TABLE ONLY venta
 
 ALTER TABLE ONLY venta
     ADD CONSTRAINT venta_idfans_fkey FOREIGN KEY (idfans) REFERENCES fans(idfans);
+
+
+--
+-- Name: venta venta_idmembresia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY venta
+    ADD CONSTRAINT venta_idmembresia_fkey FOREIGN KEY (idmembresia) REFERENCES membresia(idmembresia);
 
 
 --
