@@ -1,0 +1,16 @@
+<div *ngIf="identity" class="col-lg-8 col-lg-offset-2">
+	<div class="jumbotron">
+		<h1>Bienvenido a la tienda de juegos {{identity.nombre}}</h1>
+		<p>Compra lo que necesites</p>
+		<p>
+			<!--
+			<a class="btn btn-primary btn-lg" [routerLink]="['/mis-proyectos',identity.id]" role="button">Ver mis proyectos</a> 
+			<a class="btn btn-primary btn-lg" [routerLink]="['/proyecto/crear/',identity.id]" role="button">Crear Proyecto</a> -->
+			<a class="btn btn-primary btn-lg" [routerLink]="['/ver-videojuegos']" role="button">Videojuegos</a>
+			<a class="btn btn-primary btn-lg" [routerLink]="['/ver-accesorios']" role="button">Accesorios</a>
+			<a class="btn btn-primary btn-lg" [routerLink]="['/ver-consolas']" role="button">Consolas</a>
+			<a *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-primary btn-lg" [routerLink]="['/enviar-token']" role="button">Enviar Token</a>
+			<a *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-primary btn-lg" [routerLink]="['/ver-usuarios']" role="button">Ver Usuarios</a>
+		</p>
+	</div>
+</div>
