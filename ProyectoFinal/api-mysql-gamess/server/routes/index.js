@@ -1,4 +1,5 @@
 const consolasController = require('../controllers').consolas;
+const ventasController = require('../controllers').ventas;
 //const proyectoController = require('../controllers').proyecto;
 
 var md_auth = require('../middlewares/authenticated');
@@ -20,5 +21,11 @@ module.exports = (app) => {
   app.get('/api/all-consolas', md_auth.ensureAuth, consolasController.allConsolas); //Ruta para obtener todos los games
   app.get('/api/consola/:idConsola', md_auth.ensureAuth, consolasController.getConsola);  //Ruta para obtener un miembro  
   app.put('/api/update-consola/:id', md_auth.ensureAuth, consolasController.updateConsola);  
-  app.delete('/api/eliminar-consola/:idConsola', md_auth.ensureAuth, consolasController.deleteConsola);    
+  app.delete('/api/eliminar-consola/:idConsola', md_auth.ensureAuth, consolasController.deleteConsola);
+
+  //Api Routes para Ventas
+  app.post('/api/registrar-venta/:idUser/:nombreUser/:totVenta', md_auth.ensureAuth, ventasController.saveVenta);
+  app.get('/api/all-ventas', md_auth.ensureAuth, ventasController.getVentas);
+  app.delete('/api/eliminar-venta/:idVenta', md_auth.ensureAuth, ventasController.deleteVenta);
+
 };
