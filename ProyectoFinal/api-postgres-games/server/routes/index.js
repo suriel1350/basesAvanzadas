@@ -1,5 +1,6 @@
 const videojuegosController = require('../controllers').videojuegos;
 const accesoriosController = require('../controllers').accesorios;
+const ventasController = require('../controllers').ventas;
 //const proyectoController = require('../controllers').proyecto;
 
 var md_auth = require('../middlewares/authenticated');
@@ -30,5 +31,10 @@ module.exports = (app) => {
   app.get('/api/all-accesorios', md_auth.ensureAuth, accesoriosController.allAccesorios); //Ruta para obtener todos los games
   app.get('/api/accesorio/:idAccesorio', md_auth.ensureAuth, accesoriosController.getAccesorio);  //Ruta para obtener un miembro  
   app.put('/api/update-accesorio/:id', md_auth.ensureAuth, accesoriosController.updateAccesorio);  
-  app.delete('/api/eliminar-accesorio/:idAccesorio', md_auth.ensureAuth, accesoriosController.deleteAccesorio);  
+  app.delete('/api/eliminar-accesorio/:idAccesorio', md_auth.ensureAuth, accesoriosController.deleteAccesorio);
+
+  //Api Routes para Ventas
+  app.post('/api/registrar-venta/:idUser/:nombreUser/:totVenta', md_auth.ensureAuth, ventasController.saveVenta);
+  app.get('/api/all-ventas', md_auth.ensureAuth, ventasController.getVentas);
+  app.delete('/api/eliminar-venta/:idVenta', md_auth.ensureAuth, ventasController.deleteVenta);  
 };
