@@ -1,4 +1,5 @@
 const DetalleVentas = require('../models').DetalleVentas;
+const Consolas = require('../models').Consolas;
 const Ventas = require('../models').Ventas;
 const Sequelize = require('sequelize');
 var sequelize = new Sequelize('mysql://root:supc1234@localhost:3306/gamesproyectofinal');
@@ -69,6 +70,22 @@ function getVentas(req, res){
 	    .catch(error => res.status(400).send(error));	
 }
 
+function getDetalles(req, res){
+	var ventaId = req.params.idVenta;
+	
+	return DetalleVentas
+	    .findAll({
+	      include: [{
+	        model: Consolas,
+	      }],
+	      where: {
+			idventas: ventaId,
+		  }
+	    })
+	    .then(mydetails => res.status(200).send(mydetails))
+	    .catch(error => res.status(400).send(error));	
+}
+
 function deleteVenta(req, res){
 	var ventaId = req.params.idVenta;
 
@@ -91,6 +108,7 @@ module.exports = {
   saveVenta,
   getVentas,
   deleteVenta,
+  getDetalles,
 };
 
 /*
