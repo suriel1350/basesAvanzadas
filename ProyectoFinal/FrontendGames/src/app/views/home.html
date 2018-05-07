@@ -11,6 +11,7 @@
 			<a class="btn btn-primary btn-lg" [routerLink]="['/ver-consolas']" role="button">Consolas</a>
 			<a *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-primary btn-lg" [routerLink]="['/enviar-token']" role="button">Enviar Token</a>
 			<a *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-primary btn-lg" [routerLink]="['/ver-usuarios']" role="button">Ver Usuarios</a>
+			<a *ngIf="identity.role == 'ROLE_ADMIN'" class="btn btn-primary btn-lg" [routerLink]="['/ver-ventas']" role="button">Ver Ventas</a>
 		</p>
 	</div>
 </div>

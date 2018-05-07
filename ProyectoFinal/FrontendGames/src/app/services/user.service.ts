@@ -40,7 +40,7 @@ export class UserService{
 
 		let headers = new Headers({'Content-Type':'application/json'});
 
-		return this._http.post(this.url+'register-user', params, {headers: headers}).map(res => res.json());
+		return this._http.post(this.url+'validate-token', params, {headers: headers}).map(res => res.json());
 	}
 
 	sendTokenEmail(token, email){
@@ -52,7 +52,7 @@ export class UserService{
 				'Authorization': token
 			});
 
-		return this._http.post(this.url+'send-token', params, {headers: headers}).map(res => res.json());	
+		return this._http.post(this.url+'send-token', params, {headers: headers}).map(res => res.json());
 	}
 
 	updateUser(user_to_update){
@@ -64,10 +64,10 @@ export class UserService{
 				'Authorization': this.getToken()
 			});
 
-		return this._http.put(this.url+'update-user/'+user_to_update._id, params, {headers: headers}).map(res => res.json());	
+		return this._http.put(this.url+'update-user/'+user_to_update._id, params, {headers: headers}).map(res => res.json());
 	}
 
-	updateUsuario(token, id, user_to_update){		
+	updateUsuario(token, id, user_to_update){
 
 		let params = JSON.stringify(user_to_update);
 
@@ -76,10 +76,10 @@ export class UserService{
 				'Authorization': token
 			});
 
-		return this._http.put(this.url+'update-user/'+id, params, {headers: headers}).map(res => res.json());	
+		return this._http.put(this.url+'update-user/'+id, params, {headers: headers}).map(res => res.json());
 	}
 
-	updatePassword(user_to_update){		
+	updatePassword(user_to_update){
 		user_to_update.matricula = '';
 
 		let params = JSON.stringify(user_to_update);
@@ -89,7 +89,7 @@ export class UserService{
 				'Authorization': this.getToken()
 			});
 
-		return this._http.put(this.url+'update-user/'+user_to_update.id, params, {headers: headers}).map(res => res.json());	
+		return this._http.put(this.url+'update-user/'+user_to_update.id, params, {headers: headers}).map(res => res.json());
 	}
 
 	getIdentity(){
@@ -102,7 +102,7 @@ export class UserService{
 		}
 
 		return this.identity;
-	}	
+	}
 
 	getToken(){
 		let token = localStorage.getItem('token');

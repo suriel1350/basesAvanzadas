@@ -1,0 +1,59 @@
+<div class="head-page" *ngIf="identity">      	
+	<h1>{{titulo}} <a [routerLink]="['/']" class="btn btn-primary">Volver a Inicio</a> <a *ngIf="identity.role=='ROLE_ADMIN'" [routerLink]="['/agregar-accesorio']" class="btn btn-success">Agregar Accesorio</a></h1>	
+</div>
+
+<div *ngIf="alertMessage">
+	<div class="alert alert-info">
+		{{alertMessage}}
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">Buscar:
+  <input type="text" [(ngModel)]="term" placeholder="Buscar..." class="form-control" />  
+</div>
+
+  <table class="table table-hover" *ngIf="identity" style="background-color: white;" [mfData]="accesorio" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+      <tr>      
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="descripcion">Descripcion</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="stock">Stock</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="precio">Precio</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">Image</th>
+        <th class="text-center" scope="col">Opciones</th>      
+      </tr>
+    </thead>
+    <tbody *ngFor="let acc of mf.data|filter:term">
+      <tr>
+        <th class="text-center" scope="row" style="padding-top: 35px;">{{acc.nombre}}</th>      
+        <td class="text-center" style="padding-top: 35px;">{{acc.descripcion}}</td>
+        <td class="text-center" style="padding-top: 35px;">{{acc.stock}}</td>
+        <td class="text-center" style="padding-top: 35px;">{{acc.precio}}</td>
+        <td class="text-center">
+          <img class="img-circle" alt="{{acc.nombre}}" height="70px" width="70px" src="{{url + 'get-image-accesorio/' + acc.imagen}}"/>          
+        </td>
+        <td class="text-center" style="padding-top: 35px;">        
+          <a *ngIf="identity.role=='ROLE_ADMIN'" [routerLink]="['/editar-accesorio',acc.id]" class="btn btn-sm btn-success">Editar</a>
+          <button *ngIf="identity.role=='ROLE_ADMIN'" (click)="eliminarAccesorio(acc.id)" class="btn btn-sm btn-danger">Borrar</button>   
+          <button (click)="checkItemCart(acc.nombre, identity._id, acc)" class="btn btn-sm btn-warning">Add to Cart</button>
+        </td>      
+      </tr> 
+    </tbody>
+    <tfoot>
+      <tr>
+          <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+      </tr>
+    </tfoot>
+  </table> 

@@ -1,0 +1,65 @@
+<div class="head-page" *ngIf="identity">
+  <h1>{{titulo}} <a [routerLink]="['/ver-consolas']" class="btn btn-primary">Volver a Consolas</a></h1>
+</div>
+
+<div *ngIf="alertMessage">
+  <div class="alert alert-info">
+    {{alertMessage}}
+  </div>
+</div>
+
+<div *ngIf="identity.role=='ROLE_USER'" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+  <div class="alert alert-info">
+    No tienes permiso para esta vista
+  </div>
+</div>
+
+<div *ngIf="identity.role=='ROLE_ADMIN'" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+  <div>
+    <form #loginForm="ngForm" (ngSubmit)="crearConsola()">
+      <p>
+				<label>Nombre</label>
+				<input type="text" #nombre="ngModel" name="nombre" [(ngModel)]="consola.nombre" class="form-control" required>
+				<span *ngIf="!nombre.valid && nombre.touched">
+					Por favor llena este campo
+				</span>
+			</p>
+
+			<p>
+				<label>Descripción</label>
+				<textarea type="text" #descripcion="ngModel" name="descripcion" [(ngModel)]="consola.descripcion" class="form-control" required></textarea>
+				<span *ngIf="!descripcion.valid && descripcion.touched">
+					La descripcion es obligatoria
+				</span>
+			</p>
+
+			<p>
+				<label>Stock</label>
+				<input type="number" #stock="ngModel" name="stock" [(ngModel)]="consola.stock" class="form-control" required>
+				<span *ngIf="!stock.valid && stock.touched">
+					El stock es obligatorio
+				</span>
+			</p>
+
+      <p>
+				<label>Precio</label>
+				<input type="number" #precio="ngModel" name="precio" [(ngModel)]="consola.precio" class="form-control" required>
+				<span *ngIf="!precio.valid && precio.touched">
+					El precio es obligatorio
+				</span>
+			</p>
+
+			<div class="image_for_console" *ngIf="consola.imagen && consola.imagen != 'null'">
+				<img src="{{url + 'get-image-consola/' + consola.imagen}}" style="width: 50px;" />
+			</div>
+
+			<p>
+				<label>Sube una foto: </label>
+				<input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)"/>
+			</p>
+
+      <div *ngIf="nombre.valid && descripcion.valid && stock.valid && precio.valid">
+		    	<input type="submit" value="Agregar Consola" class="btn btn-primary">
+		    </div>
+
+    </form>

@@ -1,0 +1,61 @@
+<div class="head-page" *ngIf="identity">
+	<h1>{{titulo}}
+    <a [routerLink]="['/']" class="btn btn-primary">Volver a Inicio</a>
+    <a *ngIf="identity.role=='ROLE_ADMIN'" [routerLink]="['/agregar-consola']" class="btn btn-success">Agregar Consola</a>
+  </h1>
+</div>
+
+<div *ngIf="alertMessage">
+	<div class="alert alert-info">
+		{{alertMessage}}
+	</div>
+</div>
+
+<div class="clearfix"></div>
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">Buscar:
+  <input type="text" [(ngModel)]="term" placeholder="Buscar..." class="form-control" />
+</div>
+
+  <table class="table table-hover" *ngIf="identity" style="background-color: white;" [mfData]="consola" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="descripcion">Descripción</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="stock">Stock</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">
+          <mfDefaultSorter by="precio">Precio</mfDefaultSorter>
+        </th>
+        <th class="text-center" scope="col">Imagen</th>
+        <th class="text-center" scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let cons of mf.data|filter:term">
+      <tr>
+        <th class="text-center" scope="row" style="padding-top: 35px;">{{cons.nombre}}</th>
+        <td class="text-center" style="padding-top: 35px;">{{cons.descripcion}}</td>
+        <td class="text-center" style="padding-top: 35px;">{{cons.stock}}</td>
+        <td class="text-center" style="padding-top: 35px;">{{cons.precio}}</td>
+        <td class="text-center">
+          <img class="img-circle" alt="{{cons.nombre}}" height="70px" width="70px" src="{{url + 'get-image-consola/' + cons.imagen}}"/>
+        </td>
+        <td class="text-center" style="padding-top: 35px;">
+          <a *ngIf="identity.role=='ROLE_ADMIN'" [routerLink]="['/editar-consola',cons.id]" class="btn btn-sm btn-success">Editar</a>
+          <button *ngIf="identity.role=='ROLE_ADMIN'" (click)="eliminarConsola(cons.id)" class="btn btn-sm btn-danger">Borrar</button>
+          <button (click)="checkItemCart(cons.nombre, identity._id, cons)" class="btn btn-sm btn-warning">Add to Cart</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+          <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+      </tr>
+    </tfoot>
+  </table>

@@ -1,0 +1,68 @@
+<div class="head-page" *ngIf="identity">        
+  <h1>{{titulo}} <a [routerLink]="['/ver-videojuegos']" class="btn btn-primary">Volver a Videojuegos</a></h1> 
+</div>
+
+<div *ngIf="alertMessage">
+  <div class="alert alert-info">
+    {{alertMessage}}
+  </div>
+</div>
+
+<div *ngIf="identity.role=='ROLE_USER'" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+  <div class="alert alert-info">
+    No tienes permiso para esta vista
+  </div>
+</div>
+
+<div *ngIf="identity.role=='ROLE_ADMIN'" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+  <div>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <p>
+        <label>Nombre Videojuego</label>
+        <input type="text" #nombre="ngModel" name="nombre" [(ngModel)]="game.nombre" class="form-control" required>
+        <span *ngIf="!nombre.valid && nombre.touched">
+          El nombre es obligatorio
+        </span>
+      </p>
+      
+      <p>
+        <label>Descripcion</label>
+        <textarea type="text" #descripcion="ngModel" name="descripcion" [(ngModel)]="game.descripcion" class="form-control" required></textarea>        
+        <span *ngIf="!descripcion.valid && descripcion.touched">
+          La descripcion es obligatoria
+        </span>
+      </p>
+      
+      <p>
+        <label>Stock</label>
+        <input type="number" #stock="ngModel" name="stock" [(ngModel)]="game.stock" class="form-control" required>
+        <span *ngIf="!stock.valid && stock.touched">
+          El stock es obligatorio
+        </span>
+      </p>
+      
+      <p>
+        <label>Precio</label>
+        <input type="number" #precio="ngModel" name="precio" [(ngModel)]="game.precio" class="form-control" required>
+        <span *ngIf="!precio.valid && precio.touched">
+          El precio es obligatorio
+        </span>
+      </p>
+      
+      <div class="image_for_game" *ngIf="game.imagen && game.imagen != 'null'">
+        <img src="{{url + 'get-image-game/' + gam.imagen}}" style="width: 50px;" />
+      </div>
+
+      <p>
+        <label>Sube una imagen para el juego: </label>
+        <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)"/>
+      </p>
+
+      <div *ngIf="nombre.valid && descripcion.valid && stock.valid && precio.valid">  
+        <input type="submit" value="Crear" class="btn btn-primary">
+      </div>
+    </form>
+  </div>  
+</div>
+
+

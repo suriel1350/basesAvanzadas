@@ -1,0 +1,29 @@
+
+<div *ngIf="identity.role=='ROLE_USER'">
+  <div>
+  	<div class="alert alert-info">
+  		Error, no tienes permiso para esta vista.
+  	</div>
+  </div>
+</div>
+<div *ngIf="identity.role=='ROLE_ADMIN'">
+
+<div class="head-page" *ngIf="identity">
+	<h1>{{titulo}} <a [routerLink]="['/']" class="btn btn-primary">Volver a Inicio</a></h1>
+</div>
+
+<div *ngIf="alertMessage">
+	<div class="alert alert-info">
+		{{alertMessage}}
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<form (submit)="enviarToken()">
+  <div class="form-group">
+		    <input type="email" class="form-control" placeholder="Introduce un email..." name="email" [(ngModel)]="email">
+		  </div>
+		  <button type="submit" class="btn btn-primary">Send Token</button>
+</form>
+</div>

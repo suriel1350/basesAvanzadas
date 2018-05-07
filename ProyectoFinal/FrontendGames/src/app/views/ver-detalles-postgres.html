@@ -1,0 +1,41 @@
+<div class="head-page" *ngIf="identity">
+	<h1>{{titulo}}
+    <a [routerLink]="['/ver-ventas']" class="btn btn-primary">Volver a Ventas</a>    
+  </h1>
+</div>
+
+
+  <div *ngIf="alertMessage">
+  	<div class="alert alert-info">
+  		{{alertMessage}}
+  	</div>
+  </div>
+
+  <div *ngIf="identity.role=='ROLE_USER'">
+    <div class="alert alert-info">
+      Error, no tienes permiso para esta vista
+    </div>
+  </div>
+
+<div *ngIf="identity.role=='ROLE_ADMIN'">
+  <div class="clearfix"></div>  
+
+    <table class="table table-hover" *ngIf="identity" style="background-color: white;">
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">ID producto</th>
+          <th class="text-center" scope="col">Cantidad</th>
+          <th class="text-center" scope="col">Precio Venta</th>
+          <th class="text-center" scope="col">Producto</th>          
+        </tr>
+      </thead>
+      <tbody *ngFor="let det of detalle">
+        <tr>
+          <th class="text-center" scope="row">{{det.id}}</th>
+          <td class="text-center">{{det.cantidad}}</td>
+          <td class="text-center">{{det.precioventa}}</td>
+          <td class="text-center">{{det.nombre}}</td>                  
+        </tr>
+      </tbody>      
+    </table>    
+</div>

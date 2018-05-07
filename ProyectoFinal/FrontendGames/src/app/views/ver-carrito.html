@@ -1,0 +1,60 @@
+<div class="head-page" *ngIf="identity">      	
+	<h1>{{titulo}} 
+    <a [routerLink]="['/ver-videojuegos']" class="btn btn-primary">Volver a Videojuegos </a>
+    <a [routerLink]="['/ver-accesorios']" class="btn btn-success">Volver a Accesorios </a>
+    <a [routerLink]="['/ver-consolas']" class="btn btn-info">Volver a Consolas</a>
+  </h1>	
+</div>
+
+<div *ngIf="alertMessage">
+	<div class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{alertMessage}}
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<table class="table table-hover" *ngIf="identity" style="background-color: white;">
+    <thead>
+      <tr>      
+      	<th class="text-center" scope="col">Producto</th>
+        <th class="text-center" scope="col">Nombre</th>
+        <th class="text-center" scope="col">Categoria</th>
+        <th class="text-center" scope="col">Precio</th>
+        <th class="text-center" scope="col">Cantidad</th>        
+        <th class="text-center" scope="col">Subtotal</th>
+        <th class="text-center" scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let car of cart">
+      <tr>
+      	<td class="text-center">
+          <img class="img-circle" alt="{{car.nombre}}" height="50px" width="50px" src="{{car.imagen}}"/>
+        </td>
+        <th class="text-center" scope="row" style="padding-top: 25px;">{{car.nombre}}</th>      
+        <td class="text-center" style="padding-top: 25px;">{{car.categoria}}</td>
+        <td class="text-center" style="padding-top: 25px;">${{car.precio}}</td>
+        <td class="text-center" style="padding-top: 25px;">{{car.cantidad}}</td>
+        <td class="text-center" style="padding-top: 25px;">${{car.precio * car.cantidad}}</td>
+        <td class="text-center" style="padding-top: 25px;">
+          <button (click)="updateItemAdd(car)" class="btn btn-sm btn-info glyphicon glyphicon-plus"></button>
+          <button *ngIf="car.cantidad > 0" (click)="updateItemDec(car)" class="btn btn-sm btn-warning glyphicon glyphicon-minus"></button>
+          <button (click)="eliminarItem(car._id)" class="btn btn-sm btn-danger glyphicon glyphicon-trash"></button>
+        </td>      
+      </tr> 
+    </tbody>    
+    <tfoot>
+      <tr>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center"></td>
+          <td class="text-center" scope="row">Total</td>
+          <td class="text-center">${{total}}</td>
+          <td class="text-center">
+          	<button *ngIf="auxBoton==0" (click)="comprarProductos(cart, total)" class="btn btn-success glyphicon glyphicon-credit-card"> Comprar</button>
+          </td>
+      </tr>
+    </tfoot>
+  </table> 
