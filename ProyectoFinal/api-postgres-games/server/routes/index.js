@@ -36,5 +36,6 @@ module.exports = (app) => {
   //Api Routes para Ventas
   app.post('/api/registrar-venta/:idUser/:nombreUser/:totVenta', md_auth.ensureAuth, ventasController.saveVenta);
   app.get('/api/all-ventas', md_auth.ensureAuth, ventasController.getVentas);
+  app.get('/api/ventas-detalle/:idVenta', md_auth.ensureAuth, ventasController.getDetalles);
   app.delete('/api/eliminar-venta/:idVenta', md_auth.ensureAuth, ventasController.deleteVenta);  
 };
